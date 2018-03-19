@@ -89,7 +89,7 @@ function drinkSearch(drink) {
             var pOne = $("<p>").text("Drink-ID: " + response.drinks[i].idDrink);
             imageDiv.append(pOne);
 
-            var pTwo = $("<p>").text("strDrink: " + response.drinks[i].strDrink);
+            var pTwo = $("<p>").text("Drink Label: " + response.drinks[i].strDrink);
             imageDiv.append(pTwo);
 
             var pThree = $("<p>").text("Alcohol: " + response.drinks[i].strAlcoholic);
