@@ -94,8 +94,20 @@ function drinkSearch(drink) {
 
             var pThree = $("<p>").text("Alcohol: " + response.drinks[i].strAlcoholic);
             imageDiv.append(pThree);
-            for (var j = 1; j < 5; j++) {
-                var pFour = $("<p>").text("Ingredient: " + response.drinks[i].strIngredient + j);
+            var drinkObj = response.drinks[0]
+            var ingredients = [];
+            var measurements = [];
+            for (var j = 9; j < 23; j++) {
+                var ingredient = drinkObj[Object.keys(drinkObj)[j]];
+                var measurement = drinkObj[Object.keys(drinkObj)[j + 16]];
+                if (ingredient !== "") {
+                    ingredients.push(ingredient)
+                    measurements.push(measurement);
+                    console.log(ingredient, measurement)
+                }
+
+
+                var pFour = $("<p>").text("Ingredient: " +ingredients);
                 imageDiv.append(pFour);
             }
             var pFive = $("<p>").text("Instruction: " + response.drinks[i].strInstructions);
