@@ -1,3 +1,15 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDFxvI2pF2TVAL8YxlTKiIJsA3zAT8wT1I",
+    authDomain: "dinetime-c2874.firebaseapp.com",
+    databaseURL: "https://dinetime-c2874.firebaseio.com",
+    projectId: "dinetime-c2874",
+    storageBucket: "",
+    messagingSenderId: "647476940046"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    
 // Food Search
 $("#search-food").on("click", function (event) {
     event.preventDefault();
@@ -20,6 +32,7 @@ $("#search-drink").on("click", function (event) {
         $("#drink-input").val("")
         drinkSearch(drink);
     }
+    
 
 })  // End of $("#search-food").on("click", function (event) {}
 
@@ -76,6 +89,14 @@ function drinkSearch(drink) {
         method: 'GET',
     }).then(function (response) {
         $("#food-drink-view").empty();
+
+        for (var i = 0; i < response.drinks.length; i++) {
+            
+            var drinkObj = response.drinks[i]
+            var drinkName = drinkObj.strDrink
+            console.log(drinkObj);
+            var ingredients = [];
+            var measurements = [];
         console.log(response)
 
         for (var i = 0; i < response.drinks.length; i++) {
@@ -96,22 +117,62 @@ function drinkSearch(drink) {
             var pThree = $("<p>").text("Alcohol: " + response.drinks[i].strAlcoholic);
             imageDiv.append(pThree);
             var drinkObj = response.drinks[i]
+
             for (var j = 9; j < 23; j++) {
                 var ingredient = drinkObj[Object.keys(drinkObj)[j]];
                 if (ingredient !== "") {
-                    var pFour = $("<p>").text("Ingredient: " + drinkObj[Object.keys(drinkObj)[j]]);
-                    imageDiv.append(pFour);
-                }
-            }
-            var pFive = $("<p>").text("Instruction: " + response.drinks[i].strInstructions);
-            imageDiv.append(pFive);
-            $("#food-drink-view").prepend(imageDiv);
 
+                    ingredients.push(ingredient)
+                    measurements.push(measurement);
+                    console.log(ingredient, measurement)
+                }    
+
+            }
+            database.ref().push( {
+                drink: drinkName,
+                ID: drinkObj.idDrink,
+                type: drinkObj.strAlcoholic,
+                ingredients: ingredients,
+                measurements: measurements,
+                picture: drinkObj.strDrinkThumb,
+                instructions: drinkObj.strInstructions,
+            });
         }
 
     })  // End of the response function
 
 }   //  End of function foodSearch(food){}
+
+database.ref().on("child_added", function(snapshot) {
+    console.log([Object.keys(snapshot.val())[1]]);
+    if ([Object.keys(snapshot.val())[1]] == "drink") {
+        console.log('test')
+        var imageDiv = $('<div>');
+        imageDiv.addClass('imgClass');
+
+        // Make an image div
+        var image = $("<img>");
+        image.attr("src", snapshot.val().picture);
+        imageDiv.append(image);
+        var pOne = $("<p>").text("Drink-ID: " + snapshot.val().ID);
+        imageDiv.append(pOne);
+        var pTwo = $("<p>").text("Drink Label: " + snapshot.val().drink);
+        imageDiv.append(pTwo);
+        var pThree = $("<p>").text("Alcohol: " + snapshot.val().type);
+        imageDiv.append(pThree);
+        var ingredients = snapshot.val().ingredients;
+        var measurements = snapshot.val().measurements;
+        var recipe = $("<div>");
+        recipe.attr("id", "recipe");
+        for (let i = 0; i < ingredients.length; i++) {
+            $(recipe).append(measurements[i] + " " + ingredients[i] + ", ");  
+        }
+        imageDiv.append(recipe);
+        var pFive = $("<p>").text("Instruction: " + snapshot.val().instructions);
+        imageDiv.append(pFive);
+        $("#food-drink-view").prepend(imageDiv);
+    }
+});
 
 
 
