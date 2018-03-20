@@ -40,7 +40,7 @@ function foodSearch(food) {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
 
-           var image = $("<img>");
+            var image = $("<img>");
             image.attr("src", response.hits[i].recipe.image);
             imageDiv.append(image);
 
@@ -76,6 +76,7 @@ function drinkSearch(drink) {
         method: 'GET',
     }).then(function (response) {
         $("#food-drink-view").empty();
+        console.log(response)
 
         for (var i = 0; i < response.drinks.length; i++) {
             var imageDiv = $('<div>');
@@ -94,21 +95,13 @@ function drinkSearch(drink) {
 
             var pThree = $("<p>").text("Alcohol: " + response.drinks[i].strAlcoholic);
             imageDiv.append(pThree);
-            var drinkObj = response.drinks[0]
-            var ingredients = [];
-            var measurements = [];
+            var drinkObj = response.drinks[i]
             for (var j = 9; j < 23; j++) {
                 var ingredient = drinkObj[Object.keys(drinkObj)[j]];
-                var measurement = drinkObj[Object.keys(drinkObj)[j + 16]];
                 if (ingredient !== "") {
-                    ingredients.push(ingredient)
-                    measurements.push(measurement);
-                    console.log(ingredient, measurement)
+                    var pFour = $("<p>").text("Ingredient: " + drinkObj[Object.keys(drinkObj)[j]]);
+                    imageDiv.append(pFour);
                 }
-
-
-                var pFour = $("<p>").text("Ingredient: " +ingredients);
-                imageDiv.append(pFour);
             }
             var pFive = $("<p>").text("Instruction: " + response.drinks[i].strInstructions);
             imageDiv.append(pFive);
