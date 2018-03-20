@@ -98,6 +98,7 @@ function drinkSearch(drink) {
             var ingredients = [];
             var measurements = [];
         console.log(response)
+        }
 
         for (var i = 0; i < response.drinks.length; i++) {
             var imageDiv = $('<div>');
@@ -139,9 +140,9 @@ function drinkSearch(drink) {
             });
         }
 
-    }  // End of the response function
+    })  // End of the response function
 
-})   //  End of function foodSearch(food){}
+}   //  End of function foodSearch(food){}
 
 database.ref().on("child_added", function(snapshot) {
     console.log([Object.keys(snapshot.val())[1]]);
@@ -172,4 +173,4 @@ database.ref().on("child_added", function(snapshot) {
         imageDiv.append(pFive);
         $("#food-drink-view").prepend(imageDiv);
     }
-});
+})
