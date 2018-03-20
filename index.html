@@ -64,63 +64,18 @@
                           <input type="text" class="form-control" id="ingredient">
                         </div>
                       
-                      <!-- Here we capture the number of records that the user wants to retrieve  -->
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="meatDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Choice of Meat
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Chicken</a>
-                          <a class="dropdown-item" href="#">Fish</a>
-                          <a class="dropdown-item" href="#">Beef</a>
-                          <a class="dropdown-item" href="#">Pork</a>
-                          <a class="dropdown-item" href="#">Vegetarian</a>
-                        </div>
-                      </div>
-                  
-        
-                      <!-- Here we capture the Start Year Parameter-->
-                     <br>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="cookTimedropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Cook Time
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#">>30</a>
-                              <a class="dropdown-item" href="#">>60</a>
-                              <a class="dropdown-item" href="#">>90</a>
-                              <a class="dropdown-item" href="#">>120</a>
-                              <a class="dropdown-item" href="#"><120</a>
-                            </div>
-                          </div>
-                      
-                          <br>
-                      <!-- Here we capture the End Year Parameter -->
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="servingsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Serving Size
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#"> 2 </a>
-                          <a class="dropdown-item" href="#">4</a>
-                          <a class="dropdown-item" href="#">6</a>
-                          <a class="dropdown-item" href="#">8</a>
-                          <a class="dropdown-item" href="#"><8</a>
-                        </div>
-                      </div>
-                      <br>
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="calorieDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Calorie Count
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">300-600</a>
-                          <a class="dropdown-item" href="#">601-900</a>
-                          <a class="dropdown-item" href="#">901-1200</a>
-                          <a class="dropdown-item" href="#">1201-1500</a>
-                          <a class="dropdown-item" href="#"><1500</a>
-                        </div>
-                      </div>
+                    
+                        <h6><b>Calorie Count</b></h6>
+                        <select>
+                          <option value="select">Select</option>
+                          <option value="calorie1">>300</option>
+                          <option value="calorie2">301-600</option>
+                          <option value="calorie3">601-900</option>
+                          <option value="calorie4">901-1200</option>
+                          <option value="calorie5"><1200></option>
+                          
+                        </select>
+                  <br>
                   <br>
                       <!-- Here we have our final submit button -->
                       <button type="submit" class="btn btn-default" id="search-food"><i class="fa fa-search"></i> Submit</button>
@@ -147,42 +102,45 @@
                     <form role="form">
         
                       <!-- Here we create the text box for capturing the search term-->
+                     
+                      <h6><b>Alcoholic/Non-Alcoholic</b></h6>
+                      <select>
+                        <option value="Select">Select</option>
+                        <option value="Alcoholic">Alcoholic</option>
+                        <option value="Gin">Non-Alcoholic</option>
+                      </select>
+                      <br>
+                      <br>
                       <div class="form-group">
                         <label for="search">Drink Name</label>
                         <input type="text" class="form-control" id="drink-input">
                       </div>
         
                       <!-- Here we capture the number of records that the user wants to retrieve  -->
-                     
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="alcoholDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Liquor
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#">Vodka</a>
-                              <a class="dropdown-item" href="#">Gin</a>
-                              <a class="dropdown-item" href="#">Rum</a>
-                              <a class="dropdown-item" href="#">Tequila</a>
-                              <a class="dropdown-item" href="#">Whiskey</a>
-                            </div>
-                          </div>
-                      
+                     <h6><b>Liquor</b></h6>
+                      <select>
+                        <option value="Select">Select</option>
+                        <option value="Vodka">Vodka</option>
+                        <option value="Gin">Gin</option>
+                        <option value="Rum">Rum</option>
+                        <option value="Tequil">Tequila</option>
+                        <option value="Whiskey">Whiskey</option>
+                      </select>
+                      <br>
                         <br>
                       <!-- Here we capture the Start Year Parameter-->
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="calorieDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Calorie Count
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">300-600</a>
-                          <a class="dropdown-item" href="#">601-900</a>
-                          <a class="dropdown-item" href="#">901-1200</a>
-                          <a class="dropdown-item" href="#">1201-1500</a>
-                          <a class="dropdown-item" href="#"><1500</a>
-                        </div>
-                      </div>
+                      <h6><b>Calorie Count</b></h6>
+                      <select>
+                        <option value="select">Select</option>
+                        <option value="calorie1">>300</option>
+                        <option value="calorie2">301-600</option>
+                        <option value="calorie3">601-900</option>
+                        <option value="calorie4">901-1200</option>
+                        <option value="calorie5"><1200></option>
+                        
+                      </select>
                   <br>
-        
+                      <br>
                       <!-- Here we have our final submit button -->
                       <button type="submit" class="btn btn-default" id="search-drink"><i class="fa fa-search"></i> Submit</button>
                       
@@ -203,54 +161,6 @@
 <hr>
         <!-- End Of Jumbotron-->
 
-        <div class="row">
-            <!-- Action Submission Form  -->
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
-                <form id="food-drink">
-                    <h2>
-                        <legend>Food Submission</legend>
-                    </h2>
-                    <!-- <div class="form-group"> -->
-                    <label for="food-input">Search your Food</label>
-                    <input type="text" id="food-input">
-                    <!-- </div> -->
-                    <input id="search-food" type="submit" value="Add" class="btn btn-warning">
-                </form>
-            </div>
-
-
-            <!-- Action Submission Form  -->
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                <form id="food-drink">
-                    <h2>
-                        <legend>Drink Submission</legend>
-                    </h2>
-                    <!-- <div class="form-group"> -->
-                    <label for="drink-input">Search your Drink</label>
-                    <input type="text" id="drink-input">
-                    <!-- </div> -->
-                    <input id="search-drink" type="submit" value="Add" class="btn btn-warning">
-
-                </form>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    <!-- End of container class -->
 
     <!-- Add to the Bootstrap-JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
