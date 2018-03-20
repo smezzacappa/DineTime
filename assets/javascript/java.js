@@ -96,6 +96,7 @@ function drinkSearch(drink) {
             var ingredients = [];
             var measurements = [];
 
+
             for (var j = 9; j < 23; j++) {
                 var ingredient = drinkObj[Object.keys(drinkObj)[j]];
                 var measurement = drinkObj[Object.keys(drinkObj)[j + 16]];

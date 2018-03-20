@@ -2,6 +2,16 @@
 .jumbotron{
     background-color: chocolate;
     text-align: center;
+}
+.card {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-top: 15px;
+    width: 600px;
+  }
+  .mh1 div{
+      height: 30vh;
+  }
     margin:25px;
     border-radius: 25px;
 }
