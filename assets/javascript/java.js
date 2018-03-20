@@ -53,7 +53,7 @@ function foodSearch(food) {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
 
-           var image = $("<img>");
+            var image = $("<img>");
             image.attr("src", response.hits[i].recipe.image);
             imageDiv.append(image);
 
@@ -89,6 +89,7 @@ function drinkSearch(drink) {
         method: 'GET',
     }).then(function (response) {
         $("#food-drink-view").empty();
+
         for (var i = 0; i < response.drinks.length; i++) {
             
             var drinkObj = response.drinks[i]
@@ -96,14 +97,36 @@ function drinkSearch(drink) {
             console.log(drinkObj);
             var ingredients = [];
             var measurements = [];
+        console.log(response)
+
+        for (var i = 0; i < response.drinks.length; i++) {
+            var imageDiv = $('<div>');
+            imageDiv.addClass('imgClass');
+
+            // Make an image div
+            var image = $("<img>");
+            image.attr("src", response.drinks[i].strDrinkThumb);
+            imageDiv.append(image);
+
+            var pOne = $("<p>").text("Drink-ID: " + response.drinks[i].idDrink);
+            imageDiv.append(pOne);
+
+            var pTwo = $("<p>").text("Drink Label: " + response.drinks[i].strDrink);
+            imageDiv.append(pTwo);
+
+            var pThree = $("<p>").text("Alcohol: " + response.drinks[i].strAlcoholic);
+            imageDiv.append(pThree);
+            var drinkObj = response.drinks[i]
+
             for (var j = 9; j < 23; j++) {
                 var ingredient = drinkObj[Object.keys(drinkObj)[j]];
-                var measurement = drinkObj[Object.keys(drinkObj)[j + 16]];
                 if (ingredient !== "") {
+
                     ingredients.push(ingredient)
                     measurements.push(measurement);
                     console.log(ingredient, measurement)
                 }    
+
             }
             database.ref().push( {
                 drink: drinkName,
