@@ -1,4 +1,6 @@
+
 .jumbotron{
+    background-color: chocolate;
     text-align: center;
 }
 .card {
@@ -10,3 +12,17 @@
   .mh1 div{
       height: 30vh;
   }
+    margin:25px;
+    border-radius: 25px;
+}
+#food-input, #drink-input{
+    height:35px;
+    border-radius: 10px;
+    background-color: honeydew;
+}
+
+img{
+    width:200px;
+    height:200px;
+    border-radius: 5px;
+}
