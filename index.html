@@ -36,13 +36,10 @@
                 <h1 class="display-4"><b>Recipes for Food & Drinks!</b></h1>
             </div>
         </div>
-        <aside><h3>Search History</h3>
-          <div><h5 id="dish-div">Dishes</h5><ul id="dish-history"></ul></div>
-          <div><h5 id="drink-div">Drinks</h5><ul id="drink-history"></ul></div>
-        </aside>
+       
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-8">
                     <br>
                     <!-- First panel is for handling the search parameters -->
                     <div class="panel panel-primary">
@@ -57,7 +54,7 @@
                             <!-- Here we create an HTML Form for handling the inputs-->
                             <form role="form">
 
-                                <!-- Here we create the text box for capturing the search term-->
+                                <!-- Here we create the text box for capturing the Recipe Name-->
                                 <div class="form-group">
                                     <label for="search">Recipe Name</label>
                                     <input type="text" class="form-control" id="food-input">
@@ -68,7 +65,7 @@
                                     <!-- Here we create the text box for capturing the search term-->
                                     <div class="form-group">
                                         <label for="search">Ingredient</label>
-                                        <input type="text" class="form-control" id="ingredient">
+                                        <input type="text" class="form-control" id="food-input">
                                     </div>
 
 
@@ -94,6 +91,12 @@
 
 
                                 </form>
+                                <div class="col-sm-4">
+                                        <aside><h3>Search History</h3>
+                                            <div><h5 id="dish-div">Dishes</h5><ul id="dish-history"></ul></div>
+                                            <div><h5 id="drink-div">Drinks</h5><ul id="drink-history"></ul></div>
+                                          </aside>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -101,7 +104,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-8">
                     <br>
                     <!-- First panel is for handling the search parameters -->
                     <div class="panel panel-primary">

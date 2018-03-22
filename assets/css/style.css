@@ -43,6 +43,8 @@ img{
 }
 
 aside {
+    padding: 5px;
+    outline: solid;
     position: absolute;
     right: 40px;
     top: 40px;
