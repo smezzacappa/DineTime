@@ -43,11 +43,11 @@ img{
 }
 
 aside {
+    position: relative;
+    right: 0px;
+    top: 0px;
+    float: left;
     padding: 5px;
-    outline: solid;
-    position: absolute;
-    right: 40px;
-    top: 40px;
 }
 
 h5 {
