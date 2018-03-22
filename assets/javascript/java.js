@@ -6,7 +6,7 @@ var config = {
     projectId: "dinetime-c2874",
     storageBucket: "",
     messagingSenderId: "647476940046"
-    };
+};
 firebase.initializeApp(config);
 var database = firebase.database();
 
@@ -14,7 +14,7 @@ $("#drink-history").hide();
 $("#dish-history").hide();
 var drinkHist = false;
 var dishHist = false;
-    
+
 // Food Search
 $("#search-food").on("click", function (event) {
     event.preventDefault();
@@ -23,18 +23,24 @@ $("#search-food").on("click", function (event) {
         $("#food-input").val("")
         foodSearch(food);
     }
+    //alert if search box empty
+    else {
+        swal("You left the search box empty");
+    }
 }) // End of $("#search-food").on("click", function (event) {}
 
 // Drink Search
 $("#search-drink").on("click", function (event) {
     event.preventDefault();
-    console.log($("#liqour-type").value);
     var drink = $("#drink-input").val().trim();
     if (drink !== "") {
         $("#drink-input").val("")
         drinkSearch(drink);
     }
-
+    //alert if search box empty
+    else {
+        swal("You left the search box empty");
+    }
 
 }) // End of $("#search-food").on("click", function (event) {}
 
@@ -124,7 +130,7 @@ database.ref().on("child_added", function (snapshot) {
         $("#dish-history").append("<li> " + searchItem + "</li>");
     }
 
-    results.forEach(element => {   
+    results.forEach(element => {
         if ([Object.keys(element)[1]] == "drinkName") {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
@@ -178,7 +184,7 @@ database.ref().on("child_added", function (snapshot) {
     });
 })
 
-$("#dish-div").on("click", function() {
+$("#dish-div").on("click", function () {
     if (!dishHist) {
         $("#dish-history").show();
         dishHist = true;
@@ -186,15 +192,15 @@ $("#dish-div").on("click", function() {
         $("#dish-history").hide();
         dishHist = false;
     }
-    
+
 })
 
-$("#drink-div").on("click", function() {
+$("#drink-div").on("click", function () {
     if (!drinkHist) {
         $("#drink-history").show();
         drinkHist = true;
     } else {
         $("#drink-history").hide();
         drinkHist = false;
-    }   
+    }
 })
