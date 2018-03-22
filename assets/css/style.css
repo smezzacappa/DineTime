@@ -26,3 +26,7 @@ img{
     height:200px;
     border-radius: 5px;
 }
+
+#item-name {
+    font-weight: bold;
+}
