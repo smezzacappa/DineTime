@@ -6,6 +6,13 @@ var config = {
     projectId: "dinetime-c2874",
     storageBucket: "",
     messagingSenderId: "647476940046"
+<<<<<<< HEAD
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+
+
+=======
     };
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -15,6 +22,7 @@ $("#dish-history").hide();
 var drinkHist = false;
 var dishHist = false;
     
+>>>>>>> d2efbf52038c851519cee6590da833ccbc948cb7
 // Food Search
 $("#search-food").on("click", function (event) {
     event.preventDefault();
@@ -23,7 +31,7 @@ $("#search-food").on("click", function (event) {
         $("#food-input").val("")
         foodSearch(food);
     }
-})  // End of $("#search-food").on("click", function (event) {}
+}) // End of $("#search-food").on("click", function (event) {}
 
 // Drink Search
 $("#search-drink").on("click", function (event) {
@@ -34,9 +42,9 @@ $("#search-drink").on("click", function (event) {
         $("#drink-input").val("")
         drinkSearch(drink);
     }
-    
 
-})  // End of $("#search-food").on("click", function (event) {}
+
+}) // End of $("#search-food").on("click", function (event) {}
 
 
 // Food search function
@@ -59,16 +67,16 @@ function foodSearch(food) {
                 dishName: data.hits[i].recipe.label,
                 ingredients: data.hits[i].recipe.ingredientLines,
                 calories: data.hits[i].recipe.calories,
-                weight: data.hits[i].recipe.totalWeight,
+                // weight: data.hits[i].recipe.totalWeight,
             }
             results.push(resultItem);
         }
-        database.ref().push( {
+        database.ref().push({
             SearchTerm: food,
             results: results,
         });
     })
-}   //  End of function foodSearch(food){}
+} //  End of function foodSearch(food){}
 
 
 
@@ -81,7 +89,7 @@ function drinkSearch(drink) {
         method: 'GET',
     }).then(function (response) {
         $("#food-drink-view").empty();
-        var results = [];  
+        var results = [];
         for (var i = 0; i < response.drinks.length; i++) {
             var drinkObj = response.drinks[i];
             var ingredients = [];
@@ -92,7 +100,7 @@ function drinkSearch(drink) {
                 if (ingredient !== "") {
                     ingredients.push(ingredient);
                     measurements.push(measurement);
-                }    
+                }
             }
             var resultItem = {
                 drinkName: drinkObj.strDrink,
@@ -103,19 +111,22 @@ function drinkSearch(drink) {
                 picture: drinkObj.strDrinkThumb,
                 instructions: drinkObj.strInstructions,
             }
-            results.push(resultItem);     
+            results.push(resultItem);
         }
-        database.ref().push( {
+        database.ref().push({
             SearchTerm: drink,
-            results: results,    
+            results: results,
         });
 
-    })  // End of the response function
+    }) // End of the response function
 
-}   //  End of function foodSearch(food){}
+} //  End of function foodSearch(food){}
 
-database.ref().on("child_added", function(snapshot) {
+database.ref().on("child_added", function (snapshot) {
     var results = snapshot.val().results;
+<<<<<<< HEAD
+    results.forEach(element => {
+=======
     var searchItem = snapshot.val().SearchTerm
     console.log([Object.keys(results[0])[1]]);
     if ([Object.keys(results[0])[1]] == "drinkName") {
@@ -125,6 +136,7 @@ database.ref().on("child_added", function(snapshot) {
     }
 
     results.forEach(element => {   
+>>>>>>> d2efbf52038c851519cee6590da833ccbc948cb7
         if ([Object.keys(element)[1]] == "drinkName") {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
@@ -144,7 +156,7 @@ database.ref().on("child_added", function(snapshot) {
             var recipe = $("<ul>");
             recipe.attr("id", "recipe");
             for (let i = 0; i < ingredients.length; i++) {
-                $(recipe).append("<li>" + measurements[i] + " " + ingredients[i] + "</li>");  
+                $(recipe).append("<li>" + measurements[i] + " " + ingredients[i] + "</li>");
             }
             imageDiv.append(recipe);
             var pFive = $("<p>").text("Instructions: " + element.instructions);
@@ -157,20 +169,21 @@ database.ref().on("child_added", function(snapshot) {
             // Make an image div
             var image = $("<img>");
             image.attr("src", element.image);
-            var pOne = $("<p>").text("Dish Name: " + element.dishName);
+            var pOne = $("<p>").text(element.dishName);
             pOne.attr("id", "item-name");
             imageDiv.append(pOne);
             imageDiv.append(image);
+            var pThree = $("<p>").text("Calories: " + Math.round(element.calories));
+            imageDiv.append(pThree);
             var pTwo = $("<ul>");
             var ingredients = element.ingredients;
             for (let i = 0; i < ingredients.length; i++) {
-                $(pTwo).append("<li> -" + ingredients[i] + "</li>");  
+                $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
             imageDiv.append(pTwo);
-            var pThree = $("<p>").text("Calories: " + element.calories);
-            imageDiv.append(pThree);
-            var pFour = $("<p>").text("Weight: " + element.weight);
-            imageDiv.append(pFour);
+
+            // var pFour = $("<p>").text("Weight: " + element.weight);
+            // imageDiv.append(pFour);
             $("#food-drink-view").prepend(imageDiv);
         }
     });
