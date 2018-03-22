@@ -161,13 +161,14 @@ database.ref().on("child_added", function (snapshot) {
             imageDiv.addClass('imgClass');
 
             // Make an image div
+            var container = $("<container>");
             var image = $("<img>");
             image.attr("src", element.image);
-            var pOne = $("<p>").text(element.dishName);
+            var pOne = $("<h3>").text(element.dishName);
             pOne.attr("id", "item-name");
             imageDiv.append(pOne);
             imageDiv.append(image);
-            var pThree = $("<p>").text("Calories: " + Math.round(element.calories));
+            var pThree = $("<h4>").text("Calories: " + Math.round(element.calories));
             imageDiv.append(pThree);
             var pTwo = $("<ul>");
             var ingredients = element.ingredients;
