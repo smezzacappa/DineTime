@@ -6,11 +6,23 @@ var config = {
     projectId: "dinetime-c2874",
     storageBucket: "",
     messagingSenderId: "647476940046"
+<<<<<<< HEAD
 };
 firebase.initializeApp(config);
 var database = firebase.database();
 
 
+=======
+    };
+firebase.initializeApp(config);
+var database = firebase.database();
+
+$("#drink-history").hide();
+$("#dish-history").hide();
+var drinkHist = false;
+var dishHist = false;
+    
+>>>>>>> d2efbf52038c851519cee6590da833ccbc948cb7
 // Food Search
 $("#search-food").on("click", function (event) {
     event.preventDefault();
@@ -24,7 +36,7 @@ $("#search-food").on("click", function (event) {
 // Drink Search
 $("#search-drink").on("click", function (event) {
     event.preventDefault();
-    console.log($("#liquor-type").val());
+    console.log($("#liquor-type").value);
     var drink = $("#drink-input").val().trim();
     if (drink !== "") {
         $("#drink-input").val("")
@@ -70,7 +82,6 @@ function foodSearch(food) {
 
 // Drink search function
 function drinkSearch(drink) {
-    $("#food-drink-view").empty();
     var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
     // API response function
     $.ajax({
@@ -85,9 +96,9 @@ function drinkSearch(drink) {
             var measurements = [];
             for (var j = 9; j < 23; j++) {
                 var ingredient = drinkObj[Object.keys(drinkObj)[j]];
-                var measurement = drinkObj[Object.keys(drinkObj)[j + 16]];
+                var measurement = drinkObj[Object.keys(drinkObj)[j + 15]];
                 if (ingredient !== "") {
-                    ingredients.push(ingredient)
+                    ingredients.push(ingredient);
                     measurements.push(measurement);
                 }
             }
@@ -113,7 +124,19 @@ function drinkSearch(drink) {
 
 database.ref().on("child_added", function (snapshot) {
     var results = snapshot.val().results;
+<<<<<<< HEAD
     results.forEach(element => {
+=======
+    var searchItem = snapshot.val().SearchTerm
+    console.log([Object.keys(results[0])[1]]);
+    if ([Object.keys(results[0])[1]] == "drinkName") {
+        $("#drink-history").append("<li> " + searchItem + "</li>");
+    } else {
+        $("#dish-history").append("<li> " + searchItem + "</li>");
+    }
+
+    results.forEach(element => {   
+>>>>>>> d2efbf52038c851519cee6590da833ccbc948cb7
         if ([Object.keys(element)[1]] == "drinkName") {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
@@ -164,4 +187,25 @@ database.ref().on("child_added", function (snapshot) {
             $("#food-drink-view").prepend(imageDiv);
         }
     });
+})
+
+$("#dish-div").on("click", function() {
+    if (!dishHist) {
+        $("#dish-history").show();
+        dishHist = true;
+    } else {
+        $("#dish-history").hide();
+        dishHist = false;
+    }
+    
+})
+
+$("#drink-div").on("click", function() {
+    if (!drinkHist) {
+        $("#drink-history").show();
+        drinkHist = true;
+    } else {
+        $("#drink-history").hide();
+        drinkHist = false;
+    }   
 })
