@@ -1,43 +1,51 @@
+.jumbotron {
+    text-align: center;
+    background-image: url("../images/surfnutrition.jpg");
+    padding: 25px;
+    margin-top: 10px;
+}
 
-.jumbotron{
-        
-        background-image: url("../images/surfnutrition.jpg");}
-        /* -moz-animation: spinHorizontal 10s infinite linear;
+/* -moz-animation: spinHorizontal 10s infinite linear;
         -o-animation: spinHorizontal 10s infinite linear;    
         -webkit-animation: spinHorizontal 10s infinite linear;
         animation: spinHorizontal 10s infinite linear;
     } */
-    
-    /* @keyframes spinHorizontal {
+
+/* @keyframes spinHorizontal {
         0% { transform: rotateY(0deg); }
         100% { transform: rotateY(360deg); }
     } */
-#headline{
+
+#headline {
     color: white;
     text-align: center;
 }
-    
+
 .card {
     background-color: #f2f2f2;
     padding: 20px;
     margin-top: 15px;
     width: 600px;
-  
-  .mh1 div{
-      height: 30vh;
-  }
+    .mh1 div {
+        height: 30vh;
+    }
     margin:25px;
-    border-radius: 25px;}
+    border-radius: 25px;
+}
 
-#food-input, #drink-input{
-    height:35px;
+#food-input,
+#drink-input {
+    height: 35px;
     border-radius: 10px;
     background-color: honeydew;
 }
+#food-input, #drink-input:active{
+    outline: none;
+}
 
-img{
-    width:200px;
-    height:200px;
+img {
+    width: 200px;
+    height: 200px;
     border-radius: 5px;
 }
 
@@ -51,29 +59,53 @@ aside {
     top: 0px;
     float: left;
 }
-.panel-heading{
-    padding:15px;
+
+.panel-heading {
+    padding: 15px;
 }
+
+h4 {
+    text-decoration: underline;
+}
+
 h5 {
     text-decoration: underline;
-    
 }
-#dish-div{
+
+#dish-div {
     margin-top: 5px;
     margin-left: 10px;
-
 }
-#dish-history{
+
+#dish-history {
     margin-left: 15px;
-
 }
-#drink-div{
+
+#drink-div {
     margin-left: 10px;
 }
-#drink-history{
+
+#drink-history {
     margin-left: 15px
 }
-#search-food{
-    color:white;
+
+#search-food {
+    color: white;
     background-color: darkblue;
+}
+
+#search-food:hover {
+ 
+    background-image: url("../images/food.jpeg");
+    background-size: 70px 40px;
+}
+
+#search-drink {
+   
+    color: white;
+    background-color: darkblue;
+}
+#search-drink:hover{
+    background-image: url("../images/drinks.jpg");
+    background-size: 70px 40px;
 }

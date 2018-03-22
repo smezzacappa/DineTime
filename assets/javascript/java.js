@@ -137,8 +137,8 @@ database.ref().on("child_added", function (snapshot) {
             // Make an image div
             var image = $("<img>");
             image.attr("src", element.picture);
-            var pOne = $("<p>").text("Drink-ID: " + element.ID);
-            var pTwo = $("<p>").text("Drink: " + element.drinkName);
+            // var pOne = $("<p>").text("Drink-ID: " + element.ID);
+            var pTwo = $("<h3>").text(element.drinkName);
             pTwo.attr("id", "item-name");
             imageDiv.append(pTwo);
             imageDiv.append(image);
