@@ -28,7 +28,7 @@ $("#search-food").on("click", function (event) {
 // Drink Search
 $("#search-drink").on("click", function (event) {
     event.preventDefault();
-    console.log($("#liquor-type").value);
+    console.log($("#liqour-type").value);
     var drink = $("#drink-input").val().trim();
     if (drink !== "") {
         $("#drink-input").val("")
@@ -115,9 +115,9 @@ function drinkSearch(drink) {
 } //  End of function foodSearch(food){}
 
 database.ref().on("child_added", function (snapshot) {
-    $("#food-drink-view").empty();
     var results = snapshot.val().results;
     var searchItem = snapshot.val().SearchTerm
+    console.log([Object.keys(results[0])[1]]);
     if ([Object.keys(results[0])[1]] == "drinkName") {
         $("#drink-history").append("<li> " + searchItem + "</li>");
     } else {
