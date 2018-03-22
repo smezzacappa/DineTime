@@ -33,37 +33,42 @@
         <!-- Jumbotron -->
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4"><b>Recipes for Food & Drinks!</b></h1>
+                <h1 class="display-4">
+                    <b>Recipes for Food & Drinks!</b>
+                </h1>
             </div>
         </div>
-        
+
         <div class="container">
             <div class="row">
 
-              <div class="col-sm-9">
-                <br>
-                <!-- First panel is for handling the search parameters -->
-                <div class="panel panel-primary">
-                  <div class="panel-heading">
-                    <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>   Food Recipe</strong></h3>
-                  </div>
-                  <div class="panel-body">
-        
-                    <!-- Here we create an HTML Form for handling the inputs-->
-                    <form role="form">
-        
-                      <!-- Here we create the text box for capturing the search term-->
-                      <div class="form-group">
-                        <label for="search">Recipe Name</label>
-                        <input type="text" class="form-control" id="food-input">
-                      </div>
+                <div class="col-sm-9">
+                    <br>
+                    <!-- First panel is for handling the search parameters -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <strong>
+                                    <i class="fa  fa-list-alt"></i> Food Recipe</strong>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
 
-                      <form role="form">
-        
-                        <!-- Here we create the text box for capturing the search term-->
-                        <div class="form-group">
-                          <label for="search">Ingredient</label>
-                          <input type="text" class="form-control" id="ingredient">
+                            <!-- Here we create an HTML Form for handling the inputs-->
+                            <form role="form">
+
+                                <!-- Here we create the text box for capturing the search term-->
+                                <div class="form-group">
+                                    <label for="search">Recipe Name</label>
+                                    <input type="text" class="form-control" id="food-input">
+                                </div>
+
+                                <form role="form">
+
+                                    <!-- Here we create the text box for capturing the search term-->
+                                    <div class="form-group">
+                                        <label for="search">Ingredient</label>
+                                        <input type="text" class="form-control" id="ingredient">
 
                                     </div>
 
@@ -93,93 +98,121 @@
                         </div>
                     </div>
                 </div>
-
-              </div>
-              <div class="col-sm-1"></div>
-              <div class="col-md-2">
-                <br>
-                <aside class="panel panel-primary"><div class="panel-heading"><h3>Search History</h3></div>
-                  <div><h5 id="dish-div">Dishes</h5><ul id="dish-history"></ul></div>
-                  <div><h5 id="drink-div">Drinks</h5><ul id="drink-history"></ul></div>
-                </aside>
-              </div>
+                <div class="col-sm-1"></div>
+                <div class="col-md-2">
+                    <br>
+                    <aside class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>Search History</h3>
+                        </div>
+                        <div>
+                            <h5 id="dish-div">Dishes</h5>
+                            <ul id="dish-history"></ul>
+                        </div>
+                        <div>
+                            <h5 id="drink-div">Drinks</h5>
+                            <ul id="drink-history"></ul>
+                        </div>
+                    </aside>
+                </div>
 
             </div>
         </div>
         <div class="container">
             <div class="row">
 
-              <div class="col-sm-9">
-                <br>
-                <!-- First panel is for handling the search parameters -->
-                <div class="panel panel-primary">
-                  <div class="panel-heading">
-                    <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>  Drink Recipe</strong></h3>
-                  </div>
-                  <div class="panel-body">
-        
-                    <!-- Here we create an HTML Form for handling the inputs-->
-                    <form role="form">
-        
-                      <!-- Here we create the text box for capturing the search term-->
-                     
-                      <h6><b>Alcoholic/Non-Alcoholic</b></h6>
-                      <select>
-                        <option value="Select">Select</option>
-                        <option value="Alcoholic">Alcoholic</option>
-                        <option value="Gin">Non-Alcoholic</option>
-                      </select>
-                      <br>
-                      <br>
-                      <div class="form-group">
-                        <label for="search">Drink Name</label>
-                        <input type="text" class="form-control" id="drink-input">
-                      </div>
-        
-                      <!-- Here we capture the number of records that the user wants to retrieve  -->
-                     <h6><b>Liquor</b></h6>
-                      <select id="liqour-type">
-                        <option value="Select">Select</option>
-                        <option value="Vodka">Vodka</option>
-                        <option value="Gin">Gin</option>
-                        <option value="Rum">Rum</option>
-                        <option value="Tequil">Tequila</option>
-                        <option value="Whiskey">Whiskey</option>
-                      </select>
-                      <br>
-                        <br>
-                      <!-- Here we capture the Start Year Parameter-->
-                      <h6><b>Calorie Count</b></h6>
-                      <select>
-                        <option value="select">Select</option>
-                        <option value="calorie1">&lt;300</option>
-                        <option value="calorie2">301-600</option>
-                        <option value="calorie3">601-900</option>
-                        <option value="calorie4">901-1200</option>
-                        <option value="calorie5">&lt;1200&gt;</option>
-                        
-                      </select>
+                <div class="col-sm-9">
+                    <br>
+                    <!-- First panel is for handling the search parameters -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <strong>
+                                    <i class="fa  fa-list-alt"></i> Drink Recipe</strong>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
 
-                  <br>
-          
-                  <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
-                  <div class="panel panel-primary">
-          
-                    <!-- Panel Heading for the retrieved articles box -->
-                    <div class="panel-heading">
-                      <h3 class="panel-title"><strong><i class="fa fa-table"></i>   Top Results</strong></h3>
+                            <!-- Here we create an HTML Form for handling the inputs-->
+                            <form role="form">
+
+                                <!-- Here we create the text box for capturing the search term-->
+
+                                <h6>
+                                    <b>Alcoholic/Non-Alcoholic</b>
+                                </h6>
+                                <select>
+                                    <option value="Select">Select</option>
+                                    <option value="Alcoholic">Alcoholic</option>
+                                    <option value="Gin">Non-Alcoholic</option>
+                                </select>
+                                <br>
+                                <br>
+                                <div class="form-group">
+                                    <label for="search">Drink Name</label>
+                                    <input type="text" class="form-control" id="drink-input">
+                                </div>
+
+                                <!-- Here we capture the number of records that the user wants to retrieve  -->
+                                <h6>
+                                    <b>Liquor</b>
+                                </h6>
+                                <select id="liqour-type">
+                                    <option value="Select">Select</option>
+                                    <option value="Vodka">Vodka</option>
+                                    <option value="Gin">Gin</option>
+                                    <option value="Rum">Rum</option>
+                                    <option value="Tequil">Tequila</option>
+                                    <option value="Whiskey">Whiskey</option>
+                                </select>
+                                <br>
+                                <br>
+                                <!-- Here we capture the Start Year Parameter-->
+                                <h6>
+                                    <b>Calorie Count</b>
+                                </h6>
+                                <select>
+                                    <option value="select">Select</option>
+                                    <option value="calorie1">&lt;300</option>
+                                    <option value="calorie2">301-600</option>
+                                    <option value="calorie3">601-900</option>
+                                    <option value="calorie4">901-1200</option>
+                                    <option value="calorie5">&lt;1200&gt;</option>
+
+                                </select>
+
+                                <br>
+
+                                <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
+
+                        </div>
                     </div>
-          
-                    <!-- This main panel will hold each of the resulting articles -->
-                    <div class="panel-body" id="food-drink-view">
-                    </div>
-                  </div>
                 </div>
-              </div>
+            </div>
 
-
+        </div>
         <hr>
-        <!-- End Of Jumbotron-->
+
+
+        <!-- Panel Heading for the retrieved articles box -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <strong>
+                                    <i class="fa fa-table"></i> Top Results</strong>
+                            </h3>
+                        </div>
+
+                        <!-- This main panel will hold each of the resulting articles -->
+                        <div class="panel-body" id="food-drink-view"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
         <!-- Add to the Bootstrap-JS -->
@@ -196,7 +229,10 @@
         <!-- Add a link to the JQuery Library-->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+        <!-- add firebase link -->
         <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+        <!-- Add a link to SweetAlert Library -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!-- Add a link to the javascript file -->
         <script type="text/javascript" src="assets/javascript/java.js"></script>
 </body>
