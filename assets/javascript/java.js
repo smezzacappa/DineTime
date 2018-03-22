@@ -28,7 +28,7 @@ $("#search-food").on("click", function (event) {
 // Drink Search
 $("#search-drink").on("click", function (event) {
     event.preventDefault();
-    console.log($("#liquor-type").value);
+    console.log($("#liqour-type").value);
     var drink = $("#drink-input").val().trim();
     if (drink !== "") {
         $("#drink-input").val("")

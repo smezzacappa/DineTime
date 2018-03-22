@@ -48,8 +48,29 @@ aside {
     top: 0px;
     float: left;
 }
-
+.panel-heading{
+    padding:15px;
+}
 h5 {
     text-decoration: underline;
     
+}
+#dish-div{
+    margin-top: 5px;
+    margin-left: 10px;
+
+}
+#dish-history{
+    margin-left: 15px;
+
+}
+#drink-div{
+    margin-left: 10px;
+}
+#drink-history{
+    margin-left: 15px
+}
+#search-food{
+    color:white;
+    background-color: darkblue;
 }
