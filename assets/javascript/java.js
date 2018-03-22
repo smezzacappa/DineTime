@@ -6,13 +6,6 @@ var config = {
     projectId: "dinetime-c2874",
     storageBucket: "",
     messagingSenderId: "647476940046"
-<<<<<<< HEAD
-};
-firebase.initializeApp(config);
-var database = firebase.database();
-
-
-=======
     };
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -22,7 +15,6 @@ $("#dish-history").hide();
 var drinkHist = false;
 var dishHist = false;
     
->>>>>>> d2efbf52038c851519cee6590da833ccbc948cb7
 // Food Search
 $("#search-food").on("click", function (event) {
     event.preventDefault();
@@ -36,7 +28,7 @@ $("#search-food").on("click", function (event) {
 // Drink Search
 $("#search-drink").on("click", function (event) {
     event.preventDefault();
-    console.log($("#liquor-type").value);
+    console.log($("#liqour-type").value);
     var drink = $("#drink-input").val().trim();
     if (drink !== "") {
         $("#drink-input").val("")
@@ -124,9 +116,6 @@ function drinkSearch(drink) {
 
 database.ref().on("child_added", function (snapshot) {
     var results = snapshot.val().results;
-<<<<<<< HEAD
-    results.forEach(element => {
-=======
     var searchItem = snapshot.val().SearchTerm
     console.log([Object.keys(results[0])[1]]);
     if ([Object.keys(results[0])[1]] == "drinkName") {
@@ -136,7 +125,6 @@ database.ref().on("child_added", function (snapshot) {
     }
 
     results.forEach(element => {   
->>>>>>> d2efbf52038c851519cee6590da833ccbc948cb7
         if ([Object.keys(element)[1]] == "drinkName") {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
