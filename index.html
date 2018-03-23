@@ -24,12 +24,12 @@
 
     <!-- Add a link to AOS-CSS Library -->
     <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <!--start of body-->
 
 <body>
-    <div class="container">
+    <div class="container" id="master">
 
 
         <!-- Jumbotron -->
@@ -40,16 +40,16 @@
                 </h1>
             </div>
         </div>
-
+<hr>
         <!-- <div class="container"> -->
         <div class="row">
 
             <div class="col-sm-9">
                 <br>
                 <!-- First panel is for handling the search parameters -->
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
+                <div class="panel panel-primary" id="food-panel">
+                    <div class="panel-heading" id="food-panel-heading">
+                        <h3 class="panel-title" id="food-recipe">
                             <strong>
                                 <i class="fa  fa-list-alt"></i> Food Recipe</strong>
                         </h3>
@@ -59,7 +59,7 @@
                         <!-- Here we create an HTML Form for handling the inputs-->
                         <form role="form">
 
-                            <!-- Here we create the text box for capturing the search term-->
+                            <!-- Here we create the text box for capturing the recipe name-->
                             <div class="form-group">
                                 <label for="search">Recipe Name</label>
                                 <input type="text" class="form-control" id="food-input">
@@ -67,13 +67,13 @@
 
                             <form role="form">
 
-                                <!-- Here we create the text box for capturing the search term-->
+                                <!-- Here we create the text box for capturing the ingredient-->
                                 <div class="form-group">
                                     <label for="search">Ingredient</label>
-                                    <input type="text" class="form-control" id="ingredient">
+                                    <input type="text" class="form-control" id="food-input">
 
                                 </div>
-
+                                <!-- Here we create a colorie selector -->
 
                                 <h6>
                                     <b>Calorie Count</b>
@@ -91,7 +91,7 @@
                                 </select>
                                 <br>
                                 <br>
-                                <!-- Here we have our final submit button -->
+                                <!-- Here we have our food search submit button -->
                                 <button type="submit" class="btn btn-default" id="search-food">
                                     <i class="fa fa-search"></i> Submit</button>
 
@@ -100,10 +100,10 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Here we create a history panel -->
             <div class="col-md-3">
                 <br>
-                <aside class="panel panel-primary">
+                <aside class="panel panel-primary" id="history-panel">
                     <div class="panel-heading">
                         <h3>Search History</h3>
                     </div>
@@ -125,9 +125,9 @@
             <div class="col-sm-9">
                 <br>
                 <!-- Second panel is for searching for drinks -->
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
+                <div class="panel panel-primary" id="drink-panel">
+                    <div class="panel-heading" id="drink-panel-heading">
+                        <h3 class="panel-title" id="drink-recipe">
                             <strong>
                                 <i class="fa  fa-glass"></i> Drink Recipe</strong>
                         </h3>
@@ -137,7 +137,7 @@
                         <!-- Here we create an HTML Form for handling the inputs-->
                         <form role="form">
 
-                            <!-- Here we create the text box for capturing the search term-->
+                            <!-- Here we create the selector for choosing Alcoholic/NonAlcoholic-->
 
                             <h6>
                                 <b>Alcoholic/Non-Alcoholic</b>
@@ -149,12 +149,13 @@
                             </select>
                             <br>
                             <br>
+                            <!-- This is the input box for drink name -->
                             <div class="form-group">
                                 <label for="search">Drink Name</label>
                                 <input type="text" class="form-control" id="drink-input">
                             </div>
 
-                            <!-- Here we capture the number of records that the user wants to retrieve  -->
+                            <!-- Selector for type of liquor -->
                             <h6>
                                 <b>Liquor</b>
                             </h6>
@@ -188,7 +189,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <div class="panel panel-primary">
+                <div class="panel panel-primary" id="results-panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <strong>
@@ -198,10 +199,18 @@
 
                     <!-- This main panel will hold each of the resulting articles -->
                     <div class="panel-body" id="food-drink-view"></div>
+                    <br>
                     <hr>
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="footer">
+        <div class="p"> This Wesbite Was Created By Steven Dan &amp; Moe </div>
+        <div class="p"> Eat Well, Drink Well.</div>
+        
+
 
     </div>
 

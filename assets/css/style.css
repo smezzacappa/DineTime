@@ -3,6 +3,9 @@
     background-image: url("../images/surfnutrition.jpg");
     padding: 25px;
     margin-top: 10px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 16px -6px black;
 }
 
 /* -moz-animation: spinHorizontal 10s infinite linear;
@@ -39,7 +42,9 @@
     border-radius: 10px;
     background-color: honeydew;
 }
-#food-input, #drink-input:active{
+
+#food-input,
+#drink-input:active {
     outline: none;
 }
 
@@ -53,15 +58,64 @@ img {
     font-weight: bold;
 }
 
-aside {
+/* food search panel */
+
+#food-panel {
     position: relative;
-    right: 0px;
-    top: 0px;
-    float: left;
+    z-index: 2;
+    box-shadow: 0 8px 16px -6px black;
+    border: none;
 }
+
+#food-panel-heading {
+    background-image: url("../images/food-panel-heading.jpg");
+    background-repeat: repeat;
+    background-attachment: stretch;
+    background-position: center;
+    height: 200px;
+}
+
+#food-recipe {
+    font-size: 30px;
+    text-shadow: 2px 2px black;
+}
+
+/* drink search panel */
+
+#drink-recipe {
+    font-size: 30px;
+    text-shadow: 2px 2px black;
+}
+
+#drink-panel {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 16px -6px black;
+    border: none;
+}
+
+#drink-panel-heading {
+    background-image: url("../images/drinks-panel.jpg");
+    background-repeat: repeat;
+    background-attachment: stretch;
+    background-position: center;
+    height: 200px;
+}
+
+/* results panel */
+
+#results-panel {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 16px -6px black;
+    border: none;
+}
+
+/* All panel heads */
 
 .panel-heading {
     padding: 15px;
+    border-radius: 5px;
 }
 
 h4 {
@@ -72,6 +126,22 @@ h5 {
     text-decoration: underline;
 }
 
+/* History Panel CSS */
+
+aside {
+    position: relative;
+    right: 0px;
+    top: 0px;
+    float: left;
+}
+
+#history-panel {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 16px -6px black;
+    border: none;
+}
+
 #dish-div {
     margin-top: 5px;
     margin-left: 10px;
@@ -79,6 +149,7 @@ h5 {
 
 #dish-history {
     margin-left: 15px;
+    text-transform: uppercase;
 }
 
 #drink-div {
@@ -86,8 +157,11 @@ h5 {
 }
 
 #drink-history {
-    margin-left: 15px
+    margin-left: 15px;
+    text-transform: uppercase;
 }
+
+/* Search Buttons */
 
 #search-food {
     color: white;
@@ -95,17 +169,35 @@ h5 {
 }
 
 #search-food:hover {
- 
     background-image: url("../images/food.jpeg");
     background-size: 70px 40px;
 }
 
 #search-drink {
-   
     color: white;
     background-color: darkblue;
 }
-#search-drink:hover{
+
+#search-drink:hover {
     background-image: url("../images/drinks.jpg");
     background-size: 70px 40px;
+}
+
+.footer {
+    font-size: 10px;
+    margin-top: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+    color: white;
+    text-align: center;
+    z-index: 100;
+    padding-top: 10px;
+    box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.75);
+}
+.p{
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
