@@ -20,15 +20,18 @@ var dishHist = false;
 $("#search-food").on("click", function (event) {
     event.preventDefault();
     var food = $("#food-input").val().trim();
-    if (food !== "") {
+    var ingredient = $("#ingredient").val().trim();
+
+    if (food !=="" || ingredient !== ""){
         $("#food-input").val("")
         foodSearch(food);
-    }
+        $("ingredient").val("")
+        foodSearch(ingredient);   
     //alert if search box empty
-    else {
+    }else {
         swal("You left the search box empty");
     }
-}) // End of $("#search-food").on("click", function (event) {}
+    }) // End of $("#search-food").on("click", function (event) {}
 
 // Drink Search
 $("#search-drink").on("click", function (event) {
