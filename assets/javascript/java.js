@@ -74,6 +74,7 @@ function foodSearch(food) {
             results: results,
         });
     })
+    console.log(food);
 } //  End of function foodSearch(food){}
 
 
