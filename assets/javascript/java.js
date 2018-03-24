@@ -161,7 +161,7 @@ database.ref().on("child_added", function (snapshot) {
             imageDiv.addClass('imgClass');
 
             // Make an image div
-           
+
             var image = $("<img>");
             image.attr("src", element.image);
             var pOne = $("<h3>").text(element.dishName);
@@ -179,7 +179,7 @@ database.ref().on("child_added", function (snapshot) {
 
             // var pFour = $("<p>").text("Weight: " + element.weight);
             // imageDiv.append(pFour);
-            
+
 
             $("#food-drink-view").prepend(imageDiv);
         }
