@@ -1,3 +1,4 @@
+$("#food-drink-view").hide();
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDFxvI2pF2TVAL8YxlTKiIJsA3zAT8wT1I",
@@ -48,13 +49,14 @@ $("#search-drink").on("click", function (event) {
 // Food search function
 function foodSearch(food) {
     $("#food-drink-view").empty();
+    $("#food-drink-view").show();
     var API_KEY = "fb001d1c57dffa88545ebe6f986046e9";
     var APP_ID = "5f782d14";
     var corsProxy = "https://cors-anywhere.herokuapp.com/";
     var apiUrl = "https://api.edamam.com/search?app_id=" + APP_ID + "&app_key=" + API_KEY + "&q=" + food;
-    var queryURL = corsProxy + apiUrl;
+    var searchTermURL = corsProxy + apiUrl;
     $.ajax({
-        url: queryURL,
+        url: searchTermURL,
         method: 'GET',
     }).then(function (data) {
         $("#food-drink-view").empty();
@@ -69,8 +71,8 @@ function foodSearch(food) {
             }
             results.push(resultItem);
         }
-        database.ref().push({
-            SearchTerm: food,
+        database.ref(food).set({
+            searchTerm: food,
             results: results,
         });
     })
@@ -81,13 +83,15 @@ function foodSearch(food) {
 
 // Drink search function
 function drinkSearch(drink) {
-    var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
+    $("#food-drink-view").empty();
+    $("#food-drink-view").show();
+    var searchTermURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
     // API response function
     $.ajax({
-        url: queryURL,
+        url: searchTermURL,
         method: 'GET',
     }).then(function (response) {
-        $("#food-drink-view").empty();
+        
         var results = [];
         for (var i = 0; i < response.drinks.length; i++) {
             var drinkObj = response.drinks[i];
@@ -112,8 +116,8 @@ function drinkSearch(drink) {
             }
             results.push(resultItem);
         }
-        database.ref().push({
-            SearchTerm: drink,
+        database.ref(drink).set({
+            searchTerm: drink,
             results: results,
         });
 
@@ -121,19 +125,37 @@ function drinkSearch(drink) {
 
 } //  End of function foodSearch(food){}
 
+
 database.ref().on("child_added", function (snapshot) {
     var results = snapshot.val().results;
-    var searchItem = snapshot.val().SearchTerm
-    console.log([Object.keys(results[0])[1]]);
-    if ([Object.keys(results[0])[1]] == "drinkName") {
-        $("#drink-history").append("<li> " + searchItem + "</li>");
+    var resultsView = $('<div>');
+    var searchTerm = snapshot.val().searchTerm;
+    resultsView.attr("id", searchTerm);
+    var histItem = $("<li>")
+    var searchTermDiv = $('<div>');
+        searchTermDiv.append(searchTerm);
+        searchTermDiv.addClass('history');
+        if ([Object.keys(results[0])[1]] == "drinkName") {
+            searchTermDiv.attr({"id": searchTerm + "-hist", "value": "drink"})
+        } else {
+            searchTermDiv.attr({"id": searchTerm + "-hist", "value": "dish"})
+        }
+    var deleteButton = $("<button>")
+        deleteButton.addClass("delete");
+        deleteButton.attr("value", snapshot.key);
+        deleteButton.append("x");
+        histItem.append(searchTermDiv);
+        histItem.append(deleteButton);
+    if ([Object.keys(results[0])[1]] == "drinkName") {    
+        $("#drink-history").append(histItem);
     } else {
-        $("#dish-history").append("<li> " + searchItem + "</li>");
+        $("#dish-history").append(histItem);
     }
 
     results.forEach(element => {
         if ([Object.keys(element)[1]] == "drinkName") {
             var imageDiv = $('<div>');
+            var resultCount = 0;
             imageDiv.addClass('imgClass');
             // Make an image div
             var image = $("<img>");
@@ -156,7 +178,8 @@ database.ref().on("child_added", function (snapshot) {
             imageDiv.append(recipe);
             var pFive = $("<p>").text("Instructions: " + element.instructions);
             imageDiv.append(pFive);
-            $("#food-drink-view").prepend(imageDiv);
+            resultsView.append(imageDiv);
+            $("#food-drink-view").prepend(resultsView);
         } else {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
@@ -181,7 +204,7 @@ database.ref().on("child_added", function (snapshot) {
             // var pFour = $("<p>").text("Weight: " + element.weight);
             // imageDiv.append(pFour);
 
-
+            resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
     });
@@ -195,7 +218,6 @@ $("#dish-div").on("click", function () {
         $("#dish-history").hide();
         dishHist = false;
     }
-
 })
 
 $("#drink-div").on("click", function () {
@@ -206,4 +228,38 @@ $("#drink-div").on("click", function () {
         $("#drink-history").hide();
         drinkHist = false;
     }
+});
+
+function deleteHistory() {
+    var key = $(this)[0].value;
+    database.ref().child(key).remove();
+}
+
+database.ref().on('child_removed', function (snapshot) {
+    var deletedItem = snapshot.val().searchTerm;
+    $("#" + deletedItem).empty();
+    $("#" + deletedItem + "-hist").empty();
+
 })
+
+function showHistoryItem() {
+    var id = $(this).attr("id");
+    var value = $(this).attr("value");
+    var idSplit = id.split("");
+    idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop();
+    var searchTerm = idSplit.join("");
+    console.log(searchTerm);
+    if (value === "dish") {
+        database.ref(searchTerm).on("value", function (snapshot) {
+            console.log(snapshot.val())
+        })
+    } else if (value === "drink") {
+        database.ref(searchTerm).on("value", function (snapshot) {
+            console.log(snapshot.val())
+        })
+    }
+ 
+}
+
+$(document).on("click", ".history", showHistoryItem);
+$(document).on("click", ".delete", deleteHistory);
