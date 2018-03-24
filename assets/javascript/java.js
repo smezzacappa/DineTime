@@ -20,11 +20,14 @@ $("#search-food").on("click", function (event) {
     event.preventDefault();
     var food = $("#food-input").val().trim();
     var ingredient = $("#ingredient").val().trim();
+
     if (food !=="" || ingredient !== ""){
         $("#food-input").val("")
         foodSearch(food);
         $("#ingredient").val("")
+
         foodSearch(ingredient);   
+
     //alert if search box empty
     }else {
         swal("You left the search box empty");
@@ -51,8 +54,8 @@ $("#search-drink").on("click", function (event) {
 function foodSearch(food) {
     $("#food-drink-view").empty();
     $("#food-drink-view").show();
-    var API_KEY = "fb001d1c57dffa88545ebe6f986046e9";
-    var APP_ID = "5f782d14";
+    var API_KEY = "bb554de1a6556c5c572a6444e1916173";
+    var APP_ID = "b81e67c4";
     var corsProxy = "https://cors-anywhere.herokuapp.com/";
     var apiUrl = "https://api.edamam.com/search?app_id=" + APP_ID + "&app_key=" + API_KEY + "&q=" + food;
     var searchTermURL = corsProxy + apiUrl;
