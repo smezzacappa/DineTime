@@ -238,3 +238,10 @@ aside {
 .history {
     float: left;
 }
+
+.imgClass {
+    border: red 1px solid;
+    width: auto;
+    float: left;
+    padding: 5px;
+}

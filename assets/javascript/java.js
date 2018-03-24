@@ -15,22 +15,19 @@ $("#drink-history").hide();
 $("#dish-history").hide();
 var drinkHist = false;
 var dishHist = false;
-
 // Food Search
 $("#search-food").on("click", function (event) {
     event.preventDefault();
     var food = $("#food-input").val().trim();
     var ingredient = $("#ingredient").val().trim();
-    // var calories = $("#calories").val();
 
     if (food !=="" || ingredient !== ""){
         $("#food-input").val("")
         foodSearch(food);
         $("#ingredient").val("")
-        foodSearch(ingredient);  
-        // if(calories!==""){
-        // $("#calories").val("")
-        // foodSearch(calories);}
+
+        foodSearch(ingredient);   
+
     //alert if search box empty
     }else {
         swal("You left the search box empty");
@@ -74,7 +71,7 @@ function foodSearch(food) {
                 dishName: data.hits[i].recipe.label,
                 ingredients: data.hits[i].recipe.ingredientLines,
                 calories: data.hits[i].recipe.calories,
-                // weight: data.hits[i].recipe.totalWeight,
+                recipe: data.hits[i].recipe.url,
             }
             results.push(resultItem);
         }
@@ -83,10 +80,7 @@ function foodSearch(food) {
             results: results,
         });
     })
-    console.log(food);
 } //  End of function foodSearch(food){}
-
-
 
 // Drink search function
 function drinkSearch(drink) {
@@ -137,9 +131,7 @@ database.ref().on("child_added", function (snapshot) {
     var results = snapshot.val().results;
     var resultsView = $('<div>');
     var searchTerm = snapshot.val().searchTerm;
-    
     var histItem = $("<li>");
-        
     var searchTermDiv = $('<div>');
         searchTermDiv.append(searchTerm);
         searchTermDiv.addClass('history');
@@ -217,10 +209,6 @@ database.ref().on("child_added", function (snapshot) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
             imageDiv.append(pTwo);
-
-            // var pFour = $("<p>").text("Weight: " + element.weight);
-            // imageDiv.append(pFour);
-
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
@@ -250,7 +238,6 @@ $("#drink-div").on("click", function () {
 
 function deleteHistory() {
     var key = $(this)[0].value;
-    console.log(key);
     database.ref().child(key).remove();
 }
 
@@ -265,7 +252,6 @@ database.ref().on('child_removed', function (snapshot) {
     var deletedID = deletedTermArray.join("");
     $("#" + deletedID).empty();
     $("#" + deletedID + "histdiv").empty();
-
 })
 
 function showHistoryItem() {
@@ -282,15 +268,12 @@ function showHistoryItem() {
         var searchTerm = snapshot.val().searchTerm;
         resultsView.attr("id", searchTerm);
         results.forEach(element => {
-            console.log([Object.keys(element)[1]]);
             if ([Object.keys(element)[1]] == "drinkName") {
                 var imageDiv = $('<div>');
-                console.log('hooray!');
                 imageDiv.addClass('imgClass');
                 // Make an image div
                 var image = $("<img>");
                 image.attr("src", element.picture);
-                // var pOne = $("<p>").text("Drink-ID: " + element.ID);
                 var pTwo = $("<h3>").text(element.drinkName);
                 pTwo.attr("id", "item-name");
                 imageDiv.append(pTwo);
@@ -312,10 +295,8 @@ function showHistoryItem() {
                 $("#food-drink-view").prepend(resultsView);
             } else {
                 var imageDiv = $('<div>');
-                imageDiv.addClass('imgClass');
-        
-                // Make an image div
-        
+                imageDiv.addClass('imgClass');     
+                // Make an image div       
                 var image = $("<img>");
                 image.attr("src", element.image);
                 var pOne = $("<h3>").text(element.dishName);
@@ -329,19 +310,13 @@ function showHistoryItem() {
                 for (let i = 0; i < ingredients.length; i++) {
                     $(pTwo).append("<li> -" + ingredients[i] + "</li>");
                 }
-                imageDiv.append(pTwo);
-        
-                // var pFour = $("<p>").text("Weight: " + element.weight);
-                // imageDiv.append(pFour);
-        
+                imageDiv.append(pTwo);        
                 resultsView.append(imageDiv);
                 $("#food-drink-view").prepend(imageDiv);
             }
         });
     })
- 
 }
-
 $(document).on("click", ".history", showHistoryItem);
 $(document).on("click", ".delete", deleteHistory);
 
