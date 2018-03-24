@@ -71,7 +71,7 @@ function foodSearch(food) {
             }
             results.push(resultItem);
         }
-        database.ref().push({
+        database.ref(food).set({
             searchTerm: food,
             results: results,
         });
@@ -115,7 +115,7 @@ function drinkSearch(drink) {
             }
             results.push(resultItem);
         }
-        database.ref().push({
+        database.ref(drink).set({
             searchTerm: drink,
             results: results,
         });
@@ -131,17 +131,19 @@ database.ref().on("child_added", function (snapshot) {
     var searchTerm = snapshot.val().searchTerm;
     resultsView.attr("id", searchTerm);
     var histItem = $("<li>")
-        histItem.append(searchTerm);
-        histItem.addClass('history');
+    var searchTermDiv = $('<div>');
+        searchTermDiv.append(searchTerm);
+        searchTermDiv.addClass('history');
         if ([Object.keys(results[0])[1]] == "drinkName") {
-            histItem.attr({"id": searchTerm + "-hist", "value": "drink"})
+            searchTermDiv.attr({"id": searchTerm + "-hist", "value": "drink"})
         } else {
-            histItem.attr({"id": searchTerm + "-hist", "value": "dish"})
+            searchTermDiv.attr({"id": searchTerm + "-hist", "value": "dish"})
         }
     var deleteButton = $("<button>")
         deleteButton.addClass("delete");
         deleteButton.attr("value", snapshot.key);
         deleteButton.append("x");
+        histItem.append(searchTermDiv);
         histItem.append(deleteButton);
     if ([Object.keys(results[0])[1]] == "drinkName") {    
         $("#drink-history").append(histItem);
@@ -200,8 +202,9 @@ database.ref().on("child_added", function (snapshot) {
 
             // var pFour = $("<p>").text("Weight: " + element.weight);
             // imageDiv.append(pFour);
+
             resultsView.append(imageDiv);
-            $("#food-drink-view").prepend(resultsView);
+            $("#food-drink-view").prepend(imageDiv);
         }
     });
 })
@@ -244,11 +247,15 @@ function showHistoryItem() {
     var idSplit = id.split("");
     idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop();
     var searchTerm = idSplit.join("");
-    console.log(value);
+    console.log(searchTerm);
     if (value === "dish") {
-        foodSearch(searchTerm);
+        database.ref(searchTerm).on("value", function (snapshot) {
+            console.log(snapshot.val())
+        })
     } else if (value === "drink") {
-        drinkSearch(searchTerm);
+        database.ref(searchTerm).on("value", function (snapshot) {
+            console.log(snapshot.val())
+        })
     }
  
 }
