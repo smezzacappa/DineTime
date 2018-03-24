@@ -72,10 +72,6 @@ function foodSearch(food) {
                 ingredients: data.hits[i].recipe.ingredientLines,
                 calories: data.hits[i].recipe.calories,
                 recipe: data.hits[i].recipe.url,
-<<<<<<< HEAD
-                // weight: data.hits[i].recipe.totalWeight,
-=======
->>>>>>> 467e8827b412d75a2b1759c8f5daac4b39ec65f9
             }
             results.push(resultItem);
         }
@@ -216,14 +212,6 @@ database.ref().on("child_added", function (snapshot) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
             imageDiv.append(pTwo);
-<<<<<<< HEAD
-            imageDiv.append(pSix);
-
-            // var pFour = $("<p>").text("Weight: " + element.weight);
-            // imageDiv.append(pFour);
-
-=======
->>>>>>> 467e8827b412d75a2b1759c8f5daac4b39ec65f9
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
