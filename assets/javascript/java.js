@@ -198,9 +198,12 @@ database.ref().on("child_added", function (snapshot) {
             var image = $("<img>");
             image.attr("src", element.image);
             var pOne = $("<h3>").text(element.dishName);
+            var pSix = $("<h2>").text(element.recipe);
+            
             pOne.attr("id", "item-name");
             imageDiv.append(pOne);
             imageDiv.append(image);
+
             var pThree = $("<h4>").text("Calories: " + Math.round(element.calories));
             imageDiv.append(pThree);
             var pTwo = $("<ul>");
