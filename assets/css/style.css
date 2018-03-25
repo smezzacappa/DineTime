@@ -245,3 +245,7 @@ aside {
     float: left;
     padding: 5px;
 }
+
+#instructions {
+    width: 300px;
+}
