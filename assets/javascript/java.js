@@ -79,6 +79,8 @@ function foodSearch(food) {
             searchTerm: food,
             results: results,
         });
+    }).fail(function () {
+        swal("No recipes found");
     })
 } //  End of function foodSearch(food){}
 
@@ -121,8 +123,10 @@ function drinkSearch(drink) {
             searchTerm: drink,
             results: results,
         });
-
-    }) // End of the response function
+    }).fail(function () {
+        swal("No recipes found");
+    })
+     // End of the response function
 
 } //  End of function foodSearch(food){}
 
@@ -276,7 +280,7 @@ function showHistoryItem() {
                 imageDiv.addClass('imgClass');
                 // Make an image div
                 var image = $("<img>");
-                image.attr("src", element.picture);
+                image.attr({"src": element.picture, "width": "200px", "height": "200px"});
                 var pTwo = $("<h3>").text(element.drinkName);
                 pTwo.attr("id", "item-name");
                 imageDiv.append(pTwo);
@@ -293,6 +297,7 @@ function showHistoryItem() {
                 }
                 imageDiv.append(recipe);
                 var pFive = $("<p>").text("Instructions: " + element.instructions);
+                pFive.attr("id", "instructions");
                 imageDiv.append(pFive);
                 resultsView.append(imageDiv);
                 $("#food-drink-view").prepend(resultsView);
