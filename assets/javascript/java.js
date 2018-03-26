@@ -79,8 +79,6 @@ function foodSearch(food) {
             searchTerm: food,
             results: results,
         });
-    }).fail(function () {
-        swal("No recipes found");
     })
 } //  End of function foodSearch(food){}
 
@@ -123,8 +121,6 @@ function drinkSearch(drink) {
             searchTerm: drink,
             results: results,
         });
-    }).fail(function () {
-        swal("No recipes found");
     })
      // End of the response function
 
@@ -190,6 +186,7 @@ database.ref().on("child_added", function (snapshot) {
             }
             imageDiv.append(recipe);
             var pFive = $("<p>").text("Instructions: " + element.instructions);
+            pFive.attr("id", "instructions")
             imageDiv.append(pFive);
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(resultsView);
@@ -216,6 +213,10 @@ database.ref().on("child_added", function (snapshot) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
             imageDiv.append(pTwo);
+            var pSix = $('<a>');
+            pSix.append("Link to Recipe");
+            pSix.attr('href', element.recipe);
+            imageDiv.append(pSix);
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
@@ -318,7 +319,11 @@ function showHistoryItem() {
                 for (let i = 0; i < ingredients.length; i++) {
                     $(pTwo).append("<li> -" + ingredients[i] + "</li>");
                 }
-                imageDiv.append(pTwo);        
+                imageDiv.append(pTwo);  
+                var pSix = $('<a>');
+                pSix.append("Link to Recipe");
+                pSix.attr('href', element.recipe);
+                imageDiv.append(pSix);      
                 resultsView.append(imageDiv);
                 $("#food-drink-view").prepend(imageDiv);
             }
