@@ -54,7 +54,7 @@ $("#search-drink").on("click", function (event) {
 function foodSearch(food) {
     $("#food-drink-view").empty();
     $("#food-drink-view").show();
-    var API_KEY = "bb554de1a6556c5c572a6444e1916173";
+    var API_KEY = "bf3c7683b861847f86f4ee05390e4c05";
     var APP_ID = "b81e67c4";
     var corsProxy = "https://cors-anywhere.herokuapp.com/";
     var apiUrl = "https://api.edamam.com/search?app_id=" + APP_ID + "&app_key=" + API_KEY + "&q=" + food;
@@ -80,6 +80,9 @@ function foodSearch(food) {
             results: results,
         });
     })
+    // .fail(function () {
+    //     swal("No recipes found");
+    // })
 } //  End of function foodSearch(food){}
 
 // Drink search function
@@ -169,26 +172,31 @@ database.ref().on("child_added", function (snapshot) {
             // Make an image div
             var image = $("<img>");
             image.attr("src", element.picture);
+            image.addClass('photo');
             // var pOne = $("<p>").text("Drink-ID: " + element.ID);
             var pTwo = $("<h3>").text(element.drinkName);
             pTwo.attr("id", "item-name");
+            pTwo.addClass('drink-name')
             imageDiv.append(pTwo);
             imageDiv.append(image);
             imageDiv.append(pOne);
-            var pThree = $("<p>").text("Alcohol: " + element.type);
+            var pThree = $("<p>").text(element.type);
             imageDiv.append(pThree);
             var ingredients = element.ingredients;
+            ingredients.addClass('ingredients');
             var measurements = element.measurements;
             var recipe = $("<ul>");
             recipe.attr("id", "recipe");
             for (let i = 0; i < ingredients.length; i++) {
                 $(recipe).append("<li>" + measurements[i] + " " + ingredients[i] + "</li>");
             }
+            recipe.addClass('recipe');
             imageDiv.append(recipe);
+            
             var pFive = $("<p>").text("Instructions: " + element.instructions);
             pFive.attr("id", "instructions")
             imageDiv.append(pFive);
-            resultsView.append(imageDiv);
+            resultsView.wrap.append(imageDiv);
             $("#food-drink-view").prepend(resultsView);
         } else {
             var imageDiv = $('<div>');
@@ -199,24 +207,30 @@ database.ref().on("child_added", function (snapshot) {
             var image = $("<img>");
             image.attr("src", element.image);
             var pOne = $("<h3>").text(element.dishName);
-            var pSix = $("<h2>").text(element.recipe);
+            pOne.addClass('dishName');
+            var pSix = $("<h5>").text(element.recipe);
+            pSix.addClass('recipeUrl');
             
             pOne.attr("id", "item-name");
             imageDiv.append(pOne);
             imageDiv.append(image);
-
+            imageDiv.append(pSix);
             var pThree = $("<h4>").text("Calories: " + Math.round(element.calories));
+            pThree.addClass('calories');
             imageDiv.append(pThree);
             var pTwo = $("<ul>");
+            pTwo.addClass('list');
             var ingredients = element.ingredients;
             for (let i = 0; i < ingredients.length; i++) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
+
             imageDiv.append(pTwo);
             var pSix = $('<a>');
             pSix.append("Link to Recipe");
             pSix.attr('href', element.recipe);
             imageDiv.append(pSix);
+
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
@@ -281,7 +295,7 @@ function showHistoryItem() {
                 imageDiv.addClass('imgClass');
                 // Make an image div
                 var image = $("<img>");
-                image.attr({"src": element.picture, "width": "200px", "height": "200px"});
+                image.attr({"src": element.picture});
                 var pTwo = $("<h3>").text(element.drinkName);
                 pTwo.attr("id", "item-name");
                 imageDiv.append(pTwo);
@@ -312,6 +326,7 @@ function showHistoryItem() {
                 pOne.attr("id", "item-name");
                 imageDiv.append(pOne);
                 imageDiv.append(image);
+                var pSix = $("<h3>").text("")
                 var pThree = $("<h4>").text("Calories: " + Math.round(element.calories));
                 imageDiv.append(pThree);
                 var pTwo = $("<ul>");

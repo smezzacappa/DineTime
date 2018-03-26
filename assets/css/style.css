@@ -50,7 +50,7 @@ body{
     outline: none;
  } */
 
-.img {
+img {
     width: 200px;
     height: 200px;
     border-radius: 20px;
@@ -240,12 +240,35 @@ aside {
 }
 
 .imgClass {
-    border: red 1px solid;
-    width: auto;
+    border:black solid;
+    width: 400px;
+    height: 400px;
     float: left;
     padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
 }
 
 #instructions {
-    width: 300px;
+    width: 200px;
+    height: 200px;
+}
+
+.list{
+float: left;
+}
+.recipeUrl{
+
+}
+.dishName{
+
+}
+.drink-name{
+
+}
+.photo{
+
+}
+.calories{
+
 }
