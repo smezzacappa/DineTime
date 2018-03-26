@@ -54,7 +54,7 @@ $("#search-drink").on("click", function (event) {
 function foodSearch(food) {
     $("#food-drink-view").empty();
     $("#food-drink-view").show();
-    var API_KEY = "bb554de1a6556c5c572a6444e1916173";
+    var API_KEY = "bf3c7683b861847f86f4ee05390e4c05";
     var APP_ID = "b81e67c4";
     var corsProxy = "https://cors-anywhere.herokuapp.com/";
     var apiUrl = "https://api.edamam.com/search?app_id=" + APP_ID + "&app_key=" + API_KEY + "&q=" + food;
@@ -208,7 +208,7 @@ database.ref().on("child_added", function (snapshot) {
             var image = $("<img>");
             image.attr("src", element.image);
             var pOne = $("<h3>").text(element.dishName);
-            // pOne.addClass('dishName');
+            pOne.addClass('dishName');
             var pSix = $("<h5>").text(element.recipe);
             pSix.addClass('recipeUrl');
             
