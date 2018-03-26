@@ -79,9 +79,10 @@ function foodSearch(food) {
             searchTerm: food,
             results: results,
         });
-    }).fail(function () {
-        swal("No recipes found");
     })
+    // .fail(function () {
+    //     swal("No recipes found");
+    // })
 } //  End of function foodSearch(food){}
 
 // Drink search function
@@ -173,25 +174,30 @@ database.ref().on("child_added", function (snapshot) {
             // Make an image div
             var image = $("<img>");
             image.attr("src", element.picture);
+            image.addClass('photo');
             // var pOne = $("<p>").text("Drink-ID: " + element.ID);
             var pTwo = $("<h3>").text(element.drinkName);
             pTwo.attr("id", "item-name");
+            pTwo.addClass('drink-name')
             imageDiv.append(pTwo);
             imageDiv.append(image);
             imageDiv.append(pOne);
-            var pThree = $("<p>").text("Alcohol: " + element.type);
+            var pThree = $("<p>").text(element.type);
             imageDiv.append(pThree);
             var ingredients = element.ingredients;
+            ingredients.addClass('ingredients');
             var measurements = element.measurements;
             var recipe = $("<ul>");
             recipe.attr("id", "recipe");
             for (let i = 0; i < ingredients.length; i++) {
                 $(recipe).append("<li>" + measurements[i] + " " + ingredients[i] + "</li>");
             }
+            recipe.addClass('recipe');
             imageDiv.append(recipe);
+            
             var pFive = $("<p>").text("Instructions: " + element.instructions);
             imageDiv.append(pFive);
-            resultsView.append(imageDiv);
+            resultsView.wrap.append(imageDiv);
             $("#food-drink-view").prepend(resultsView);
         } else {
             var imageDiv = $('<div>');
@@ -202,20 +208,24 @@ database.ref().on("child_added", function (snapshot) {
             var image = $("<img>");
             image.attr("src", element.image);
             var pOne = $("<h3>").text(element.dishName);
-            var pSix = $("<h2>").text(element.recipe);
+            // pOne.addClass('dishName');
+            var pSix = $("<h5>").text(element.recipe);
+            pSix.addClass('recipeUrl');
             
             pOne.attr("id", "item-name");
             imageDiv.append(pOne);
             imageDiv.append(image);
-
+            imageDiv.append(pSix);
             var pThree = $("<h4>").text("Calories: " + Math.round(element.calories));
+            pThree.addClass('calories');
             imageDiv.append(pThree);
             var pTwo = $("<ul>");
+            pTwo.addClass('list');
             var ingredients = element.ingredients;
             for (let i = 0; i < ingredients.length; i++) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
-            imageDiv.append(pTwo);
+            imageDiv.wrap.append(pTwo);
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
@@ -280,7 +290,7 @@ function showHistoryItem() {
                 imageDiv.addClass('imgClass');
                 // Make an image div
                 var image = $("<img>");
-                image.attr({"src": element.picture, "width": "200px", "height": "200px"});
+                image.attr({"src": element.picture});
                 var pTwo = $("<h3>").text(element.drinkName);
                 pTwo.attr("id", "item-name");
                 imageDiv.append(pTwo);
@@ -311,6 +321,7 @@ function showHistoryItem() {
                 pOne.attr("id", "item-name");
                 imageDiv.append(pOne);
                 imageDiv.append(image);
+                var pSix = $("<h3>").text("")
                 var pThree = $("<h4>").text("Calories: " + Math.round(element.calories));
                 imageDiv.append(pThree);
                 var pTwo = $("<ul>");
