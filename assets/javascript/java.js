@@ -322,7 +322,6 @@ function showHistoryItem() {
                 pOne.attr("id", "item-name");
                 imageDiv.append(pOne);
                 imageDiv.append(image);
-                var pSix = $("<h3>").text("")
                 var pThree = $("<h4>").text("Calories: " + Math.round(element.calories));
                 imageDiv.append(pThree);
                 var pTwo = $("<ul>");
