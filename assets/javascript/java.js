@@ -225,8 +225,8 @@ database.ref().on("child_added", function (snapshot) {
             for (let i = 0; i < ingredients.length; i++) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
-            imageDiv.wrap.append(pTwo);
-            resultsView.append(imageDiv);
+            imageDiv.wrap(pTwo);
+            resultsView.wrap(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
     });
