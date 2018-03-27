@@ -167,6 +167,10 @@ aside {
     box-shadow: 0 8px 16px -6px black;
     border: none;
 }
+#history-panel-heading{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 #dish-div {
     margin-top: 5px;
@@ -242,8 +246,8 @@ aside {
 
 .imgClass {
     border:black solid;
-    width: 400px;
-    height: 400px;
+    width: auto;
+    height: auto;
     float: left;
     padding: 5px;
     margin: 5px;
@@ -255,9 +259,9 @@ aside {
     height: 200px;
 }
 
-.list{
+/* .list{
 float: left;
-}
+} */
 .recipeUrl{
 
 }

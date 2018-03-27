@@ -124,8 +124,6 @@ function drinkSearch(drink) {
             searchTerm: drink,
             results: results,
         });
-    }).fail(function () {
-        swal("No recipes found");
     })
      // End of the response function
 
@@ -196,6 +194,7 @@ database.ref().on("child_added", function (snapshot) {
             imageDiv.append(recipe);
             
             var pFive = $("<p>").text("Instructions: " + element.instructions);
+            pFive.attr("id", "instructions")
             imageDiv.append(pFive);
             resultsView.wrap.append(imageDiv);
             $("#food-drink-view").prepend(resultsView);
@@ -208,10 +207,7 @@ database.ref().on("child_added", function (snapshot) {
             var image = $("<img>");
             image.attr("src", element.image);
             var pOne = $("<h3>").text(element.dishName);
-            pOne.addClass('dishName');
-            var pSix = $("<h5>").text(element.recipe);
-            pSix.addClass('recipeUrl');
-            
+            pOne.addClass('dishName');          
             pOne.attr("id", "item-name");
             imageDiv.append(pOne);
             imageDiv.append(image);
@@ -225,8 +221,14 @@ database.ref().on("child_added", function (snapshot) {
             for (let i = 0; i < ingredients.length; i++) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
-            imageDiv.wrap(pTwo);
-            resultsView.wrap(imageDiv);
+
+            imageDiv.append(pTwo);
+            var pSix = $('<a>');
+            pSix.append("Link to Recipe");
+            pSix.attr('href', element.recipe);
+            imageDiv.append(pSix);
+
+            resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
     });
@@ -329,7 +331,11 @@ function showHistoryItem() {
                 for (let i = 0; i < ingredients.length; i++) {
                     $(pTwo).append("<li> -" + ingredients[i] + "</li>");
                 }
-                imageDiv.append(pTwo);        
+                imageDiv.append(pTwo);  
+                var pSix = $('<a>');
+                pSix.append("Link to Recipe");
+                pSix.attr('href', element.recipe);
+                imageDiv.append(pSix);      
                 resultsView.append(imageDiv);
                 $("#food-drink-view").prepend(imageDiv);
             }
