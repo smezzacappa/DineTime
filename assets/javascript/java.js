@@ -183,7 +183,6 @@ database.ref().on("child_added", function (snapshot) {
             var pThree = $("<p>").text(element.type);
             imageDiv.append(pThree);
             var ingredients = element.ingredients;
-            ingredients.addClass('ingredients');
             var measurements = element.measurements;
             var recipe = $("<ul>");
             recipe.attr("id", "recipe");
@@ -196,7 +195,7 @@ database.ref().on("child_added", function (snapshot) {
             var pFive = $("<p>").text("Instructions: " + element.instructions);
             pFive.attr("id", "instructions")
             imageDiv.append(pFive);
-            resultsView.wrap.append(imageDiv);
+            resultsView.append(imageDiv);
             $("#food-drink-view").prepend(resultsView);
         } else {
             var imageDiv = $('<div>');
