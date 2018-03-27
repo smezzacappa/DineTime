@@ -241,8 +241,8 @@ aside {
 
 .imgClass {
     border:black solid;
-    width: 400px;
-    height: 400px;
+    width: auto;
+    height: auto;
     float: left;
     padding: 5px;
     margin: 5px;
@@ -254,9 +254,9 @@ aside {
     height: 200px;
 }
 
-.list{
+/* .list{
 float: left;
-}
+} */
 .recipeUrl{
 
 }
