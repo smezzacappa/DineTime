@@ -304,9 +304,15 @@ function showHistoryItem() {
     $("#food-drink-view").show();
     var id = $(this).attr("id");
     var value = $(this).attr("value");
+    console.log(value);
     var idSplit = id.split("");
     idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop();
     var searchTerm = idSplit.join("");
+    if (value === "dish") {
+        searchTerm = "food" + searchTerm;
+    } else {
+        searchTerm = "drink" + searchTerm;
+    }
     database.ref(searchTerm).on("value", function (snapshot) {
         var results = snapshot.val().results;
         var resultsView = $('<div>');
