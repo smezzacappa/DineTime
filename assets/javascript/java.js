@@ -24,7 +24,7 @@ $("#search-food").on("click", function (event) {
     event.preventDefault();
     var food = $("#food-input").val().trim();
     var ingredient = $("#ingredient").val().trim();
-    if (storedDishes.indexOf(food) > -1){
+    if ((storedDishes.indexOf(food) > -1) || (storedDishes.indexOf(ingredient > -1))){
         swal(`${food} is already in search history`)
         $("#ingredient").val("")
         $("#food-input").val("")
