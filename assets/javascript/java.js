@@ -164,6 +164,7 @@ database.ref().on("child_added", function (snapshot) {
             }   
         }
     var termID = searchTermArray.join("");
+    console.log(termID);
     resultsView.attr("id", termID);
     histItem.attr("id", termID + "histdiv");
     if ([Object.keys(results[0])[1]] == "drinkName") {
@@ -218,6 +219,7 @@ database.ref().on("child_added", function (snapshot) {
             imageDiv.append(pFive);
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(resultsView);
+            console.log(resultsView.attr("id"));
         } else {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
@@ -250,6 +252,7 @@ database.ref().on("child_added", function (snapshot) {
 
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
+            console.log(resultsView.attr("id"));
         }
     });
 })
@@ -318,6 +321,7 @@ function showHistoryItem() {
         var resultsView = $('<div>');
         var searchTerm = snapshot.val().searchTerm;
         resultsView.attr("id", searchTerm);
+        console.log(searchTerm);
         results.forEach(element => {
             if ([Object.keys(element)[1]] == "drinkName") {
                 var imageDiv = $('<div>');
@@ -368,7 +372,7 @@ function showHistoryItem() {
                 pSix.attr('href', element.recipe);
                 imageDiv.append(pSix);      
                 resultsView.append(imageDiv);
-                $("#food-drink-view").prepend(imageDiv);
+                $("#food-drink-view").prepend(resultsView);
             }
         });
     })
