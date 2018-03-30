@@ -10,35 +10,42 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
-
 $("#drink-history").hide();
 $("#dish-history").hide();
 var drinkHist = false;
 var dishHist = false;
+var storedDrinks = [];
+var storedDishes = [];
 // Food Search
 $("#search-food").on("click", function (event) {
     event.preventDefault();
     var food = $("#food-input").val().trim();
     var ingredient = $("#ingredient").val().trim();
-
-    if (food !=="" || ingredient !== ""){
+    if (food ==="" && ingredient === "") {
+        swal("You left the search box empty");
+        return false;
+    } else if ((storedDishes.indexOf(food) > -1) || (storedDishes.indexOf(ingredient) > -1)) {
+        swal(`${food} is already in search history`)
+        $("#ingredient").val("")
+        $("#food-input").val("")
+        return false;
+    } else if (food !=="" || ingredient !== "") {
         $("#food-input").val("")
         foodSearch(food);
         $("#ingredient").val("")
-
         foodSearch(ingredient);   
-
     //alert if search box empty
-    }else {
-        swal("You left the search box empty");
-    }
-    }) // End of $("#search-food").on("click", function (event) {}
-
+    } 
+}) // End of $("#search-food").on("click", function (event) {}
 // Drink Search
 $("#search-drink").on("click", function (event) {
     event.preventDefault();
     var drink = $("#drink-input").val().trim();
-    if (drink !== "") {
+    if (storedDrinks.indexOf(drink) > -1){
+        swal(`${drink} is already in search history`);
+        $("#drink-input").val("");
+        return false;
+    } else if (drink !== "") {
         $("#drink-input").val("")
         drinkSearch(drink);
     }
@@ -46,45 +53,45 @@ $("#search-drink").on("click", function (event) {
     else {
         swal("You left the search box empty");
     }
-
 }) // End of $("#search-food").on("click", function (event) {}
-
-
 // Food search function
 function foodSearch(food) {
     $("#food-drink-view").empty();
     $("#food-drink-view").show();
     var API_KEY = "bf3c7683b861847f86f4ee05390e4c05";
     var APP_ID = "b81e67c4";
-    var corsProxy = "https://cors-anywhere.herokuapp.com/";
+    var corsProxy = "https://cors-anywhere.herokuapp.com/"; 
     var apiUrl = "https://api.edamam.com/search?app_id=" + APP_ID + "&app_key=" + API_KEY + "&q=" + food;
-    var searchTermURL = corsProxy + apiUrl;
+    var searchTermURL =  corsProxy + apiUrl;
     $.ajax({
         url: searchTermURL,
         method: 'GET',
     }).then(function (data) {
-        $("#food-drink-view").empty();
-        var results = [];
-        for (var i = 0; i < data.hits.length; i++) {
-            var resultItem = {
-                image: data.hits[i].recipe.image,
-                dishName: data.hits[i].recipe.label,
-                ingredients: data.hits[i].recipe.ingredientLines,
-                calories: data.hits[i].recipe.calories,
-                recipe: data.hits[i].recipe.url,
+        if (data.q !== "") {
+            if (data.hits.length === 0) {
+                swal(`Search of ${food} returned no results`);
+                return false;
+            } else {
+                $("#food-drink-view").empty();
+                var results = [];
+                for (var i = 0; i < data.hits.length; i++) {
+                    var resultItem = {
+                        image: data.hits[i].recipe.image,
+                        dishName: data.hits[i].recipe.label,
+                        ingredients: data.hits[i].recipe.ingredientLines,
+                        calories: data.hits[i].recipe.calories,
+                        recipe: data.hits[i].recipe.url,
+                    }
+                    results.push(resultItem);
+                }
+                database.ref('food' + food).set({
+                    searchTerm: food,
+                    results: results,
+                });
             }
-            results.push(resultItem);
-        }
-        database.ref(food).set({
-            searchTerm: food,
-            results: results,
-        });
+        }       
     })
-    // .fail(function () {
-    //     swal("No recipes found");
-    // })
 } //  End of function foodSearch(food){}
-
 // Drink search function
 function drinkSearch(drink) {
     $("#food-drink-view").empty();
@@ -95,41 +102,42 @@ function drinkSearch(drink) {
         url: searchTermURL,
         method: 'GET',
     }).then(function (response) {
-        
-        var results = [];
-        for (var i = 0; i < response.drinks.length; i++) {
-            var drinkObj = response.drinks[i];
-            var ingredients = [];
-            var measurements = [];
-            for (var j = 9; j < 23; j++) {
-                var ingredient = drinkObj[Object.keys(drinkObj)[j]];
-                var measurement = drinkObj[Object.keys(drinkObj)[j + 15]];
-                if (ingredient !== "") {
-                    ingredients.push(ingredient);
-                    measurements.push(measurement);
+        if (response.drinks === null) {
+            swal(`Search of ${drink} returned no results`);
+            return false;
+        } else {
+            var results = [];
+            for (var i = 0; i < response.drinks.length; i++) {
+                var drinkObj = response.drinks[i];
+                var ingredients = [];
+                var measurements = [];
+                for (var j = 9; j < 23; j++) {
+                    var ingredient = drinkObj[Object.keys(drinkObj)[j]];
+                    var measurement = drinkObj[Object.keys(drinkObj)[j + 15]];
+                    if (ingredient !== "") {
+                        ingredients.push(ingredient);
+                        measurements.push(measurement);
+                    }
                 }
+                var resultItem = {
+                    drinkName: drinkObj.strDrink,
+                    ID: drinkObj.idDrink,
+                    ingredients: ingredients,
+                    measurements: measurements,
+                    type: drinkObj.strAlcoholic,
+                    picture: drinkObj.strDrinkThumb,
+                    instructions: drinkObj.strInstructions,
+                }
+                results.push(resultItem);
             }
-            var resultItem = {
-                drinkName: drinkObj.strDrink,
-                ID: drinkObj.idDrink,
-                ingredients: ingredients,
-                measurements: measurements,
-                type: drinkObj.strAlcoholic,
-                picture: drinkObj.strDrinkThumb,
-                instructions: drinkObj.strInstructions,
-            }
-            results.push(resultItem);
+            database.ref(`drink${drink}`).set({
+                searchTerm: drink,
+                results: results,
+            });
         }
-        database.ref(drink).set({
-            searchTerm: drink,
-            results: results,
-        });
     })
      // End of the response function
-
 } //  End of function foodSearch(food){}
-
-
 database.ref().on("child_added", function (snapshot) {
     var results = snapshot.val().results;
     var resultsView = $('<div>');
@@ -147,11 +155,13 @@ database.ref().on("child_added", function (snapshot) {
     var termID = searchTermArray.join("");
     resultsView.attr("id", termID);
     histItem.attr("id", termID + "histdiv");
-        if ([Object.keys(results[0])[1]] == "drinkName") {
-            searchTermDiv.attr({"id": termID + "-hist", "value": "drink"})
-        } else {
-            searchTermDiv.attr({"id": termID + "-hist", "value": "dish"})
-        }
+    if ([Object.keys(results[0])[1]] == "drinkName") {
+        searchTermDiv.attr({"id": termID + "-hist", "value": "drink"})
+        storedDrinks.push(searchTerm);
+    } else {
+        searchTermDiv.attr({"id": termID + "-hist", "value": "dish"})
+        storedDishes.push(searchTerm);   
+    }
     var deleteButton = $("<button>")
         deleteButton.addClass("delete");
         deleteButton.attr("value", snapshot.key);
@@ -163,7 +173,6 @@ database.ref().on("child_added", function (snapshot) {
     } else {
         $("#dish-history").append(histItem);
     }
-
     results.forEach(element => {
         if ([Object.keys(element)[1]] == "drinkName") {
             var imageDiv = $('<div>');
@@ -190,8 +199,7 @@ database.ref().on("child_added", function (snapshot) {
                 $(recipe).append("<li>" + measurements[i] + " " + ingredients[i] + "</li>");
             }
             recipe.addClass('recipe');
-            imageDiv.append(recipe);
-            
+            imageDiv.append(recipe);  
             var pFive = $("<p>").text("Instructions: " + element.instructions);
             pFive.attr("id", "instructions")
             imageDiv.append(pFive);
@@ -200,9 +208,7 @@ database.ref().on("child_added", function (snapshot) {
         } else {
             var imageDiv = $('<div>');
             imageDiv.addClass('imgClass');
-
             // Make an image div
-
             var image = $("<img>");
             image.attr("src", element.image);
             var pOne = $("<h3>").text(element.dishName);
@@ -220,20 +226,16 @@ database.ref().on("child_added", function (snapshot) {
             for (let i = 0; i < ingredients.length; i++) {
                 $(pTwo).append("<li> -" + ingredients[i] + "</li>");
             }
-
             imageDiv.append(pTwo);
             var pSix = $('<a>');
             pSix.append("Link to Recipe");
             pSix.attr('href', element.recipe);
             imageDiv.append(pSix);
-
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
         }
     });
 })
-
-
 $("#dish-div").on("click", function () {
     if (!dishHist) {
         $("#dish-history").show();
@@ -243,7 +245,6 @@ $("#dish-div").on("click", function () {
         dishHist = false;
     }
 })
-
 $("#drink-div").on("click", function () {
     if (!drinkHist) {
         $("#drink-history").show();
@@ -261,6 +262,12 @@ function deleteHistory() {
 
 database.ref().on('child_removed', function (snapshot) {
     var deletedTerm = snapshot.val().searchTerm;
+    var result1 = snapshot.val().results[0];
+    if ([Object.keys(result1)[1]] == "drinkName") {
+        storedDrinks.splice(storedDrinks.indexOf(deletedTerm), 1);
+    } else {
+        storedDishes.splice(storedDishes.indexOf(deletedTerm), 1);
+    }
     var deletedTermArray = deletedTerm.split("");
         for (let i = 0; i < deletedTermArray.length; i++) {
             if (deletedTermArray[i] === " ") {
@@ -280,6 +287,11 @@ function showHistoryItem() {
     var idSplit = id.split("");
     idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop();
     var searchTerm = idSplit.join("");
+    if (value === "dish") {
+        searchTerm = "food" + searchTerm;
+    } else {
+        searchTerm = "drink" + searchTerm;
+    }
     database.ref(searchTerm).on("value", function (snapshot) {
         var results = snapshot.val().results;
         var resultsView = $('<div>');
@@ -335,7 +347,7 @@ function showHistoryItem() {
                 pSix.attr('href', element.recipe);
                 imageDiv.append(pSix);      
                 resultsView.append(imageDiv);
-                $("#food-drink-view").prepend(imageDiv);
+                $("#food-drink-view").prepend(resultsView);
             }
         });
     })
