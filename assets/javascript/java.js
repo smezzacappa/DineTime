@@ -245,7 +245,7 @@ database.ref().on("child_added", function (snapshot) {
             imageDiv.append(pTwo);
             var pSix = $('<a>');
             pSix.append("Link to Recipe");
-            pSix.attr('href', element.recipe);
+            pSix.attr({'href': element.recipe, "title": element.dishName + " Recipe"});
             imageDiv.append(pSix);
             resultsView.append(imageDiv);
             $("#food-drink-view").prepend(imageDiv);
@@ -372,7 +372,7 @@ function showHistoryItem() {
                 imageDiv.append(pTwo);  
                 var pSix = $('<a>');
                 pSix.append("Link to Recipe");
-                pSix.attr('href', element.recipe);
+                pSix.attr({'href': element.recipe, "title": element.dishName + " Recipe"});
                 imageDiv.append(pSix);      
                 resultsView.append(imageDiv);
                 $("#food-drink-view").prepend(resultsView);
