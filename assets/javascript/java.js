@@ -84,7 +84,14 @@ function foodSearch(food) {
                     }
                     results.push(resultItem);
                 }
-                database.ref('food' + food).set({
+                var foodArray = food.split("");
+                for (let i = 0; i < foodArray.length; i++) {
+                    if (foodArray[i] === " ") {
+                        foodArray.splice(i, 1);    
+                    }   
+                }
+                var foodID = foodArray.join("")
+                database.ref('food' + foodID).set({
                     searchTerm: food,
                     results: results,
                 });
@@ -130,7 +137,14 @@ function drinkSearch(drink) {
                 }
                 results.push(resultItem);
             }
-            database.ref(`drink${drink}`).set({
+            var drinkArray = drink.split("");
+                for (let i = 0; i < drinkArray.length; i++) {
+                    if (drinkArray[i] === " ") {
+                        drinkArray.splice(i, 1);    
+                    }   
+            }
+            var drinkID = drinkArray.join("")
+            database.ref(`drink${drinkID}`).set({
                 searchTerm: drink,
                 results: results,
             });
@@ -154,6 +168,7 @@ database.ref().on("child_added", function (snapshot) {
         }
     var termID = searchTermArray.join("");
     resultsView.attr("id", termID);
+    
     histItem.attr("id", termID + "histdiv");
     if ([Object.keys(results[0])[1]] == "drinkName") {
         searchTermDiv.attr({"id": termID + "-hist", "value": "drink"})
@@ -173,6 +188,7 @@ database.ref().on("child_added", function (snapshot) {
     } else {
         $("#dish-history").append(histItem);
     }
+    
     results.forEach(element => {
         if ([Object.keys(element)[1]] == "drinkName") {
             var imageDiv = $('<div>');
@@ -283,6 +299,7 @@ function showHistoryItem() {
     $("#food-drink-view").empty();
     $("#food-drink-view").show();
     var id = $(this).attr("id");
+    
     var value = $(this).attr("value");
     var idSplit = id.split("");
     idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop(); idSplit.pop();
@@ -296,7 +313,18 @@ function showHistoryItem() {
         var results = snapshot.val().results;
         var resultsView = $('<div>');
         var searchTerm = snapshot.val().searchTerm;
-        resultsView.attr("id", searchTerm);
+        var searchTermDiv = $('<div>');
+        searchTermDiv.append(searchTerm);
+        searchTermDiv.addClass('history');
+        var searchTermArray = searchTerm.split("");
+        for (let i = 0; i < searchTermArray.length; i++) {
+            if (searchTermArray[i] === " ") {
+                searchTermArray.splice(i, 1);  
+                  
+            }
+        }
+        var termID = searchTermArray.join("");
+        resultsView.attr("id", termID);
         results.forEach(element => {
             if ([Object.keys(element)[1]] == "drinkName") {
                 var imageDiv = $('<div>');
